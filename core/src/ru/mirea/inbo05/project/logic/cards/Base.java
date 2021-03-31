@@ -1,12 +1,14 @@
 package ru.mirea.inbo05.project.logic.cards;
 
 public class Base extends Card {
-    public int health;
-    public boolean isTaunt;
+    private int health;
+    private boolean isTaunt;
 
     public Base(int health, boolean isTaunt) {
         this.health = health;
         this.isTaunt = isTaunt;
+
+        // TODO добавить чтение из JSON
     }
 
     public int getHealth() {

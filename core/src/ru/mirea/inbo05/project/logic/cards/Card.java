@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic.cards;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import ru.mirea.inbo05.project.logic.commands.Command;
 
 import java.util.List;
@@ -12,7 +13,6 @@ public class Card {
     private List<Command> mainEffect;
     private List<Command> allyEffect;
     private List<Command> trashEffect;
-    private boolean isBase;
 
     /*
     Тут должны быть конструкторы, наверно...
@@ -26,26 +26,7 @@ public class Card {
         return name;
     }
 
-    public Sprite getImage() {
-        return image;
-    }
-
     public Faction getFaction() {
         return faction;
-    }
-
-    public List<Command> getMainEffect() {
-        return mainEffect;
-    }
-    public List<Command> getAllyEffect() {
-        return allyEffect;
-    }
-
-    public List<Command> getTrashEffect() {
-        return trashEffect;
-    }
-
-    public boolean isBase() {
-        return isBase;
     }
 }
