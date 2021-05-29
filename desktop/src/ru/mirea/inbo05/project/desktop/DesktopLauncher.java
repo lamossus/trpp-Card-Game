@@ -7,6 +7,8 @@ import ru.mirea.inbo05.project.StarRealms;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.height = 960;
+		config.width = 1280;
 		new LwjglApplication(new StarRealms(), config);
 	}
 }

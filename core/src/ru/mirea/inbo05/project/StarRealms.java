@@ -7,27 +7,31 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StarRealms extends ApplicationAdapter {
+	Assets assets;
 	SpriteBatch batch;
-	Texture img;
+	Texture test;
 	
 	@Override
-	public void create () {
+	public void create ()
+	{
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		assets = new Assets();
 	}
 
 	@Override
-	public void render () {
+	public void render ()
+	{
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(test, 0, 0);
 		batch.end();
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose ()
+	{
 		batch.dispose();
-		img.dispose();
+		test.dispose();
 	}
 }
