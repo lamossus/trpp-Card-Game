@@ -9,9 +9,32 @@ public class PlayerState {
     private int health;
     private int money;
     private int attack;
-    private List<Card> deck;
-    private List<Card> discard;
-    private List<Card> hand;
-    private List<Card> playedCards;
-    private List<Base> bases;
+    public List<Card> deck;
+    public List<Card> discard;
+    public List<Card> hand;
+    public List<Card> playedCards;
+    public List<Base> bases;
+
+    public int getHealth() {
+        return health;
+    }
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+
 }
