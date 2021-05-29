@@ -37,6 +37,7 @@ public class PlayerState {
         this.attack = attack;
     }
 
+    /** Сбросить карту */
     public void Discard(Card card)
     {
         card.clearListeners();

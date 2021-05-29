@@ -80,6 +80,7 @@ public class Card extends Actor {
         sprite.draw(batch, getX(), getY(), getWidth() * scale, getHeight() * scale);
     }
 
+    /** Добавить карте её эффекты при разыгрывании */
     void Play()
     {
         addListener(new ClickListener()
@@ -142,6 +143,7 @@ public class Card extends Actor {
         });
     }
 
+    /** Изменить размер карты */
     void Scale(float scale)
     {
         this.scale = scale;

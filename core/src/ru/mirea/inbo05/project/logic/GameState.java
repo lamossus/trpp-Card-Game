@@ -17,6 +17,7 @@ public class GameState {
     public List<Card> trash;
     private int explorerQuantity;
 
+    /** Пополнить торговый ряд */
     public void Refill()
     {
         for (int i = 0; i < 5; i++)
@@ -40,6 +41,7 @@ public class GameState {
 
     }
 
+    /** Удалить карту с торгового ряда */
     public void RemoveFromCardRow(Card card)
     {
         for (int i = 0; i < 5; i ++)

@@ -38,6 +38,7 @@ public class StarRealms extends ApplicationAdapter {
 		assets = new Assets();
 		stage = new Stage(new ScreenViewport());
 
+		// Тестовое, потом удалить
 		for (int i = 0; i < 30; i ++)
 		{
 			final Card testCard = new Card("alliance-transport.jpg");
