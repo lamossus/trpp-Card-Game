@@ -5,9 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Card;
-import ru.mirea.inbo05.project.logic.commands.BuyCommand;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -24,15 +22,14 @@ public class GameState {
         {
             if (tradeRow[i] == null)
             {
-                Card card = tradeDeck.pop();
+                final Card card = tradeDeck.pop();
                 tradeRow[i] = card;
                 card.setPosition(200 + i * 240, 540, Align.center);
 
-                final BuyCommand buyCommand = new BuyCommand(card);
                 card.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        buyCommand.execute();
+                        buy(card);
                     }
                 });
                 StarRealms.stage.addActor(card);
@@ -53,6 +50,16 @@ public class GameState {
             }
         }
         Refill();
+    }
+
+    public void buy(Card card) {
+        PlayerState playerState = StarRealms.playerState;
+        if (card.getCost() <= playerState.getMoney()) {
+            StarRealms.gameState.RemoveFromCardRow(card);
+
+            playerState.Discard(card);
+            playerState.setMoney(playerState.getMoney() - card.getCost());
+        }
     }
 
     public int getExplorerQuantity() {
