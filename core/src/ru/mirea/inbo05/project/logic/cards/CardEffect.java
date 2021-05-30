@@ -13,7 +13,7 @@ public class CardEffect {
     /** Текст, отображаемый при активации */
     private String effectText = "Test effect";
 
-    public void Activate() {
+    public void activate() {
         for (Command command : commands)
         {
             boolean success = false;

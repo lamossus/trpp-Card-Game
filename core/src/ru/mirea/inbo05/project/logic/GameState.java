@@ -16,7 +16,7 @@ public class GameState {
     private int explorerQuantity;
 
     /** Пополнить торговый ряд */
-    public void Refill()
+    public void refill()
     {
         for (int i = 0; i < 5; i++)
         {
@@ -39,7 +39,7 @@ public class GameState {
     }
 
     /** Удалить карту с торгового ряда */
-    public void RemoveFromCardRow(Card card)
+    public void removeFromCardRow(Card card)
     {
         for (int i = 0; i < 5; i ++)
         {
@@ -49,15 +49,15 @@ public class GameState {
                 break;
             }
         }
-        Refill();
+        refill();
     }
 
     public void buy(Card card) {
         PlayerState playerState = StarRealms.playerState;
         if (card.getCost() <= playerState.getMoney()) {
-            StarRealms.gameState.RemoveFromCardRow(card);
+            StarRealms.gameState.removeFromCardRow(card);
 
-            playerState.Discard(card);
+            playerState.discard(card);
             playerState.setMoney(playerState.getMoney() - card.getCost());
         }
     }

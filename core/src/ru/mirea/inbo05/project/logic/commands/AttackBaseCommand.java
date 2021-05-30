@@ -29,7 +29,7 @@ public class AttackBaseCommand implements Command {
         {
             target.remove();
             enemyState.bases.remove(target);
-            enemyState.Discard(target);
+            enemyState.discard(target);
 
             playerState.setAttack(playerState.getAttack() - target.getHealth());
             return true;

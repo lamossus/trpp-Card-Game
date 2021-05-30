@@ -11,7 +11,7 @@ public class PlayerState {
     private int money = 0;
     private int attack = 0;
     public List<Card> deck;
-    private List<Card> discard = new ArrayList<>();
+    private List<Card> discardDeck = new ArrayList<>();
     public List<Card> hand;
     public List<Card> playedCards;
     public List<Base> bases;
@@ -38,28 +38,28 @@ public class PlayerState {
     }
 
     /** Сбросить карту */
-    public void Discard(Card card)
+    public void discard(Card card)
     {
         card.clearListeners();
-        discard.add(card);
+        discardDeck.add(card);
     }
 
     private void shuffle() {
         int index;
         Card temp;
-        for (int i = 0; i < discard.size(); i++) {
-            index = (int) (Math.random() * (discard.size() - i)) + i;
-            temp = discard.get(i);
-            discard.set(i, discard.get(index));
-            discard.set(index, temp);
+        for (int i = 0; i < discardDeck.size(); i++) {
+            index = (int) (Math.random() * (discardDeck.size() - i)) + i;
+            temp = discardDeck.get(i);
+            discardDeck.set(i, discardDeck.get(index));
+            discardDeck.set(index, temp);
         }
     }
 
     public void draw() {
         if (deck.isEmpty()) {
             shuffle();
-            deck.addAll(discard);
-            discard.clear();
+            deck.addAll(discardDeck);
+            discardDeck.clear();
         }
         hand.set(hand.size(), deck.get(0));
         deck.remove(0);

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,9 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import ru.mirea.inbo05.project.StarRealms;
-import ru.mirea.inbo05.project.logic.commands.Command;
-
-import java.util.List;
 
 /**
  * Класс, описывающий свойства карты.
@@ -95,7 +91,7 @@ public class Card extends Actor {
                 main.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        mainEffect.Activate();
+                        mainEffect.activate();
                     }
                 });
                 StarRealms.stage.addActor(main);
@@ -106,7 +102,7 @@ public class Card extends Actor {
                     ally.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            allyEffect.Activate();
+                            allyEffect.activate();
                         }
                     });
                 else
@@ -120,7 +116,7 @@ public class Card extends Actor {
                     trash.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            trashEffect.Activate();
+                            trashEffect.activate();
                         }
                     });
                 else
