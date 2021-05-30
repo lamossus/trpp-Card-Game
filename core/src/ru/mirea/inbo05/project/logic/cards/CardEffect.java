@@ -13,8 +13,9 @@ public class CardEffect {
     /** Текст, отображаемый при активации */
     private String effectText = "Test effect";
 
+    /** Активировать все эффекты карты */
     public void activate() {
-        for (Command command : commands)
+        for (Command command : commands) // Выполнять команду, пока она не завершится успешно
         {
             boolean success = false;
             while (!success)

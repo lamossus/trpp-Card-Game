@@ -11,13 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerState {
+    /** Здоровье игрока */
     private int health = 50;
+    /** Очки торговли игрока */
     private int money = 0;
+    /** Очки атаки игрока */
     private int attack = 0;
+    /** Колода игрока */
     public List<Card> deck = new ArrayList<>();
+    /** Сброс игрока */
     private List<Card> discardDeck = new ArrayList<>();
+    /** Рука игрока */
     public List<Card> hand = new ArrayList<>();
+    /** Разыгранные карты игрока */
     public List<Card> playedCards = new ArrayList<>();
+    /** Разыгранные базы игрока */
     public List<Base> bases = new ArrayList<>();
 
     public int getHealth() {
@@ -48,6 +56,7 @@ public class PlayerState {
         discardDeck.add(card);
     }
 
+    /** Перемешать сброс */
     private void shuffle() {
         int index;
         Card temp;
@@ -59,6 +68,7 @@ public class PlayerState {
         }
     }
 
+    /** Вытянуть карту из колоды */
     public void draw() {
         if (deck.isEmpty()) {
             shuffle();
@@ -82,6 +92,7 @@ public class PlayerState {
         StarRealms.stage.addActor(card);
     }
 
+    /** Разместить карты в руке по порядку */
     void repositionCardsInHand()
     {
         int index = 0;

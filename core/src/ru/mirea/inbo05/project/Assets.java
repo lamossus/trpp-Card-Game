@@ -45,6 +45,7 @@ public class Assets {
         return manager.get("uiskin.json", Skin.class);
     }
 
+    /** Избавиться от всех загруженных ресурсов */
     public void dispose()
     {
         manager.dispose();

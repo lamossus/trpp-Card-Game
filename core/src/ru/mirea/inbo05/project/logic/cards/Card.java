@@ -75,7 +75,7 @@ public class Card extends Actor {
         sprite.draw(batch, getX(), getY(), getWidth() * getScaleX(), getHeight() * getScaleY());
     }
 
-    /** Добавить карте её эффекты при разыгрывании */
+    /** Разыграть карту из руки и активировать её эффекты при разыгрывании */
     public void play()
     {
         clearListeners();

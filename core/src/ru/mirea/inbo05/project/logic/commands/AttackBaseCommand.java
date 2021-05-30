@@ -4,6 +4,8 @@ import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.Base;
 
+// TODO командами должны быть только возможные эффекты карт, соответственно это всё надо переделать в метод GameState или PlayerState
+
 /** Команда для атаки вражеской базы */
 public class AttackBaseCommand implements Command {
     /** Атакуемая база */

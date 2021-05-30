@@ -10,9 +10,13 @@ import java.util.List;
 import java.util.Stack;
 
 public class GameState {
+    /** Колода торгового ряда */
     public Stack<Card> tradeDeck = new Stack<>();
+    /** Торговый ряд */
     Card[] tradeRow = new Card[5];
+    /** Карты в утиле */
     public List<Card> trash;
+    /** Количество доступных исследователей */
     private int explorerQuantity;
 
     /** Пополнить торговый ряд */
@@ -53,6 +57,7 @@ public class GameState {
         refill();
     }
 
+    /** Купить карту из торгового ряда */
     public void buy(Card card) {
         PlayerState playerState = StarRealms.playerState;
         if (card.getCost() <= playerState.getMoney()) {
