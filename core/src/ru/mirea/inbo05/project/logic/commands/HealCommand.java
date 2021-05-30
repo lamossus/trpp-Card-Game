@@ -8,7 +8,8 @@ public class HealCommand implements Command {
     private int healAmount;
 
     @Override
-    public void execute() {
+    public boolean execute() {
         StarRealms.playerState.setHealth(StarRealms.playerState.getHealth() + healAmount);
+        return true;
     }
 }

@@ -14,7 +14,7 @@ public class AttackBaseCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         PlayerState enemyState = StarRealms.enemyState;
         PlayerState playerState = StarRealms.playerState;
 
@@ -22,7 +22,7 @@ public class AttackBaseCommand implements Command {
         {
             Base base = enemyState.bases.get(i);
             if (base.isTaunt() && base != target)
-                return;
+                return false;
         }
 
         if (target.getHealth() <= playerState.getAttack())
@@ -32,6 +32,9 @@ public class AttackBaseCommand implements Command {
             enemyState.Discard(target);
 
             playerState.setAttack(playerState.getAttack() - target.getHealth());
+            return true;
         }
+
+        return false;
     }
 }

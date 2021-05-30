@@ -15,7 +15,13 @@ public class CardEffect {
 
     public void Activate() {
         for (Command command : commands)
-            command.execute();
+        {
+            boolean success = false;
+            while (!success)
+            {
+                success = command.execute();
+            }
+        }
     }
     public boolean isActive() {
         return isActive;

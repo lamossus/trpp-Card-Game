@@ -6,5 +6,5 @@ package ru.mirea.inbo05.project.logic.commands;
  */
 public interface Command {
     /** Метод, исполняющий команду */
-    void execute();
+    boolean execute();
 }
