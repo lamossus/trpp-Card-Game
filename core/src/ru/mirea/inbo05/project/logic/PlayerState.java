@@ -44,7 +44,7 @@ public class PlayerState {
         discard.add(card);
     }
 
-    public void shuffle() {
+    private void shuffle() {
         int index;
         Card temp;
         for (int i = 0; i < discard.size(); i++) {
@@ -58,7 +58,7 @@ public class PlayerState {
     public void draw() {
         if (deck.isEmpty()) {
             shuffle();
-            deck = discard;
+            deck.addAll(discard);
             discard.clear();
         }
         hand.set(hand.size(), deck.get(0));
