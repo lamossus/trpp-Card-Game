@@ -78,18 +78,18 @@ public class Card extends Actor {
     /** Разыграть карту из руки и активировать её эффекты при разыгрывании */
     public void play()
     {
-        clearListeners();
+        clearListeners(); // Очистить список слушателей, чтобы разыгранную карту нельзя было разыграть ещё раз
 
         setScale(0.7f);
         int playedCards = StarRealms.playerState.playedCards.size();
-        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomLeft);
+        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
         StarRealms.playerState.playedCards.add(this);
         StarRealms.playerState.hand.remove(this);
 
         addListener(new ClickListener()
         {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) { // Теперь карта это кнопка, нажатие которой вызывает ещё 4 кнопки - основной, союзный и эффект утиля, а также кнопка отмены
                 super.clicked(event, x, y);
                 Skin skin = StarRealms.assets.getSkin();
 
@@ -101,7 +101,7 @@ public class Card extends Actor {
                 main.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        mainEffect.activate();
+                        mainEffect.activate(); // Добавленной кнопки добавляется соответствующий функционал
                     }
                 });
                 StarRealms.stage.addActor(main);
@@ -138,7 +138,7 @@ public class Card extends Actor {
                 cancel.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        main.remove();
+                        main.remove(); // Кнопка отмены убирает все остальные кнопки
                         ally.remove();
                         trash.remove();
                         cancel.remove();
