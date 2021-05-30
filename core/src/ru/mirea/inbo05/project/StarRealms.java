@@ -33,8 +33,6 @@ public class StarRealms extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		final PlayerState playerState = new PlayerState();
-
 		batch = new SpriteBatch();
 		assets = new Assets();
 		stage = new Stage(new ScreenViewport());
@@ -67,12 +65,11 @@ public class StarRealms extends ApplicationAdapter {
 				playerState.setMoney(0);
 				playerState.setAttack(0);
 
-				playerState.deck.addAll(playerState.playedCards);
+				playerState.discardDeck.addAll(playerState.playedCards);
 				playerState.playedCards.clear();
 
 				while (playerState.hand.size() != 5) {
-					playerState.hand.add(playerState.deck.get(0));
-					playerState.deck.remove(0);
+					playerState.draw();
 				}
 			}
 		});
