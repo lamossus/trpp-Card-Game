@@ -25,8 +25,8 @@ public class StarRealms extends ApplicationAdapter {
 	public static PlayerState enemyState = new PlayerState();
 	public static GameState gameState = new GameState();
 
-	final static int width = Gdx.graphics.getWidth();
-	final static int height = Gdx.graphics.getHeight();
+	static int width;
+	static int height;
 
 	SpriteBatch batch;
 	Color test = new Color((float) 0.537, (float) 0.756, (float) 0.439, (float) 0.5);
@@ -36,6 +36,9 @@ public class StarRealms extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		assets = new Assets();
 		stage = new Stage(new ScreenViewport());
+
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 
 		// Тестовое, потом удалить
 		Random rand = new Random();
@@ -58,17 +61,22 @@ public class StarRealms extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 
 		final TextButton endTurn = new TextButton("End turn", assets.getSkin());
-		endTurn.setPosition(width/2f, height/2f + 10, Align.center);
+		endTurn.setPosition(width, height/2f + 10, Align.right);
 		endTurn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				playerState.setMoney(0);
 				playerState.setAttack(0);
 
-				playerState.discardDeck.addAll(playerState.playedCards);
+				for (Card card : playerState.playedCards)
+					playerState.discard(card);
 				playerState.playedCards.clear();
 
-				while (playerState.hand.size() != 5) {
+				for (Card card : playerState.hand)
+					playerState.discard(card);
+				playerState.hand.clear();
+
+				while (playerState.hand.size() < 5) {
 					playerState.draw();
 				}
 			}

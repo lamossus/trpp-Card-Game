@@ -54,6 +54,7 @@ public class PlayerState {
     {
         card.clearListeners();
         discardDeck.add(card);
+        card.remove();
     }
 
     /** Перемешать сброс */
@@ -76,6 +77,7 @@ public class PlayerState {
             discardDeck.clear();
         }
         final Card card = deck.get(0);
+        card.setScale(0.8f);
         hand.add(card);
         deck.remove(0);
 
