@@ -43,4 +43,25 @@ public class PlayerState {
         card.clearListeners();
         discard.add(card);
     }
+
+    private void shuffle() {
+        int index;
+        Card temp;
+        for (int i = 0; i < discard.size(); i++) {
+            index = (int) (Math.random() * (discard.size() - i)) + i;
+            temp = discard.get(i);
+            discard.set(i, discard.get(index));
+            discard.set(index, temp);
+        }
+    }
+
+    public void draw() {
+        if (deck.isEmpty()) {
+            shuffle();
+            deck.addAll(discard);
+            discard.clear();
+        }
+        hand.set(hand.size(), deck.get(0));
+        deck.remove(0);
+    }
 }
