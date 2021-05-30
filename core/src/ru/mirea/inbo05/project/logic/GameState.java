@@ -24,7 +24,7 @@ public class GameState {
             {
                 final Card card = tradeDeck.pop();
                 tradeRow[i] = card;
-                card.setPosition(200 + i * 240, 540, Align.center);
+                card.setPosition(200 + i * 240, 900, Align.center);
 
                 card.addListener(new ClickListener() {
                     @Override

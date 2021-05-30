@@ -1,5 +1,9 @@
 package ru.mirea.inbo05.project.logic;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
+import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Base;
 import ru.mirea.inbo05.project.logic.cards.Card;
 
@@ -10,11 +14,11 @@ public class PlayerState {
     private int health = 50;
     private int money = 0;
     private int attack = 0;
-    public List<Card> deck;
+    public List<Card> deck = new ArrayList<>();
     private List<Card> discardDeck = new ArrayList<>();
-    public List<Card> hand;
-    public List<Card> playedCards;
-    public List<Base> bases;
+    public List<Card> hand = new ArrayList<>();
+    public List<Card> playedCards = new ArrayList<>();
+    public List<Base> bases = new ArrayList<>();
 
     public int getHealth() {
         return health;
@@ -61,7 +65,30 @@ public class PlayerState {
             deck.addAll(discardDeck);
             discardDeck.clear();
         }
-        hand.set(hand.size(), deck.get(0));
+        final Card card = deck.get(0);
+        hand.add(card);
         deck.remove(0);
+
+        card.addListener( new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                card.play();
+                repositionCardsInHand();
+            }
+        });
+
+        repositionCardsInHand();
+
+        StarRealms.stage.addActor(card);
+    }
+
+    void repositionCardsInHand()
+    {
+        int index = 0;
+        for (Card card : hand)
+        {
+            card.setPosition(index * card.getWidth() * card.getScaleX(), 0, Align.bottomLeft);
+            index++;
+        }
     }
 }

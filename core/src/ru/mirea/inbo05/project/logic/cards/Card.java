@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic.cards;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -39,8 +40,6 @@ public class Card extends Actor {
     /** Спрайт */
     private Drawable sprite;
 
-    private float scale;
-
     Card()
     {
         Texture texture = StarRealms.assets.getTexture(textureName);
@@ -56,7 +55,7 @@ public class Card extends Actor {
         sprite = new TextureRegionDrawable(texture);
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        Scale(0.8f);
+        setScale(0.8f);
     }
 
     public int getCost() {
@@ -73,12 +72,20 @@ public class Card extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.draw(batch, getX(), getY(), getWidth() * scale, getHeight() * scale);
+        sprite.draw(batch, getX(), getY(), getWidth() * getScaleX(), getHeight() * getScaleY());
     }
 
     /** Добавить карте её эффекты при разыгрывании */
-    void Play()
+    public void play()
     {
+        clearListeners();
+
+        setScale(0.7f);
+        int playedCards = StarRealms.playerState.playedCards.size();
+        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomLeft);
+        StarRealms.playerState.playedCards.add(this);
+        StarRealms.playerState.hand.remove(this);
+
         addListener(new ClickListener()
         {
             @Override
@@ -86,8 +93,11 @@ public class Card extends Actor {
                 super.clicked(event, x, y);
                 Skin skin = StarRealms.assets.getSkin();
 
+                int width = Gdx.graphics.getWidth();
+                int height = Gdx.graphics.getHeight();
+
                 final TextButton main = new TextButton(mainEffect.getEffectText(), skin);
-                main.setPosition(640, 500, Align.center);
+                main.setPosition(width/2f, height/2f + 100, Align.center);
                 main.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -97,7 +107,7 @@ public class Card extends Actor {
                 StarRealms.stage.addActor(main);
 
                 final TextButton ally = new TextButton(allyEffect != null ? allyEffect.getEffectText() : "There is no ally effect on this card.", skin);
-                ally.setPosition(640, 450, Align.center);
+                ally.setPosition(width/2f, height/2f + 50, Align.center);
                 if (allyEffect != null)
                     ally.addListener(new ClickListener() {
                         @Override
@@ -111,7 +121,7 @@ public class Card extends Actor {
 
 
                 final TextButton trash = new TextButton(trashEffect != null ? trashEffect.getEffectText() : "There is no trash effect on this card.", skin);
-                trash.setPosition(640, 400, Align.center);
+                trash.setPosition(width/2f, height/2f, Align.center);
                 if (trashEffect != null)
                     trash.addListener(new ClickListener() {
                         @Override
@@ -124,7 +134,7 @@ public class Card extends Actor {
                 StarRealms.stage.addActor(trash);
 
                 final TextButton cancel = new TextButton("Cancel", skin);
-                cancel.setPosition(640, 350, Align.center);
+                cancel.setPosition(width/2f, height/2f - 50, Align.center);
                 cancel.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -137,12 +147,5 @@ public class Card extends Actor {
                 StarRealms.stage.addActor(cancel);
             }
         });
-    }
-
-    /** Изменить размер карты */
-    void Scale(float scale)
-    {
-        this.scale = scale;
-        setScale(scale);
     }
 }

@@ -34,6 +34,13 @@ public class StarRealms extends ApplicationAdapter {
 			final Card testCard = new Card("alliance-transport.jpg");
 			gameState.tradeDeck.add(testCard);
 		}
+		for (int i = 0; i < 10; i ++)
+		{
+			final Card testCard = new Card("alliance-transport.jpg");
+			playerState.deck.add(testCard);
+		}
+		for (int i = 0; i < 5; i++)
+			playerState.draw();
 
 		gameState.refill();
 
