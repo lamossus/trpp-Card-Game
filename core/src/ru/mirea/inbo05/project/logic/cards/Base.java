@@ -1,5 +1,7 @@
 package ru.mirea.inbo05.project.logic.cards;
 
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+
 /**
  * Класс описывающий свойства карт баз.
  */
@@ -8,13 +10,6 @@ public class Base extends Card {
     private int health;
     /** Является ли карта авангардом */
     private boolean isTaunt;
-
-    public Base(int health, boolean isTaunt) {
-        this.health = health;
-        this.isTaunt = isTaunt;
-
-        // TODO добавить чтение из JSON
-    }
 
     public int getHealth() {
         return health;
