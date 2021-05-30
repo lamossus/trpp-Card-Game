@@ -20,7 +20,7 @@ public class PlayerState {
     /** Колода игрока */
     public List<Card> deck = new ArrayList<>();
     /** Сброс игрока */
-    private List<Card> discardDeck = new ArrayList<>();
+    public List<Card> discardDeck = new ArrayList<>();
     /** Рука игрока */
     public List<Card> hand = new ArrayList<>();
     /** Разыгранные карты игрока */

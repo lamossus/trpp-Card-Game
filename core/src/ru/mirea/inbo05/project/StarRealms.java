@@ -5,7 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import ru.mirea.inbo05.project.logic.GameState;
 import ru.mirea.inbo05.project.logic.PlayerState;
@@ -17,15 +21,18 @@ public class StarRealms extends ApplicationAdapter {
 	public static Assets assets;
 	public static Stage stage;
 
-	SpriteBatch batch;
-	Color test = new Color(1,0,0,1);
-
-	public static PlayerState playerState = new PlayerState(), enemyState = new PlayerState();
+	public static PlayerState playerState = new PlayerState();
+	public static PlayerState enemyState = new PlayerState();
 	public static GameState gameState = new GameState();
 
+	final static int width = Gdx.graphics.getWidth();
+	final static int height = Gdx.graphics.getHeight();
+
+	SpriteBatch batch;
+	Color test = new Color((float) 0.537, (float) 0.756, (float) 0.439, (float) 0.5);
+
 	@Override
-	public void create ()
-	{
+	public void create () {
 		batch = new SpriteBatch();
 		assets = new Assets();
 		stage = new Stage(new ScreenViewport());
@@ -49,6 +56,24 @@ public class StarRealms extends ApplicationAdapter {
 		gameState.refill();
 
 		Gdx.input.setInputProcessor(stage);
+
+		final TextButton endTurn = new TextButton("End turn", assets.getSkin());
+		endTurn.setPosition(width/2f, height/2f + 10, Align.center);
+		endTurn.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				playerState.setMoney(0);
+				playerState.setAttack(0);
+
+				playerState.discardDeck.addAll(playerState.playedCards);
+				playerState.playedCards.clear();
+
+				while (playerState.hand.size() != 5) {
+					playerState.draw();
+				}
+			}
+		});
+		StarRealms.stage.addActor(endTurn);
 	}
 
 	@Override
