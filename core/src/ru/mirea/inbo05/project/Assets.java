@@ -44,4 +44,9 @@ public class Assets {
     {
         return manager.get("uiskin.json", Skin.class);
     }
+
+    public void dispose()
+    {
+        manager.dispose();
+    }
 }

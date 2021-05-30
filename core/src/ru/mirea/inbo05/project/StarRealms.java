@@ -11,6 +11,8 @@ import ru.mirea.inbo05.project.logic.GameState;
 import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.Card;
 
+import java.util.Random;
+
 public class StarRealms extends ApplicationAdapter {
 	public static Assets assets;
 	public static Stage stage;
@@ -29,9 +31,11 @@ public class StarRealms extends ApplicationAdapter {
 		stage = new Stage(new ScreenViewport());
 
 		// Тестовое, потом удалить
+		Random rand = new Random();
+
 		for (int i = 0; i < 30; i ++)
 		{
-			final Card testCard = new Card("alliance-transport.jpg");
+			final Card testCard = new Card(rand.nextInt() % 2 == 0 ? "alliance-transport.jpg" : "trade-star.jpg");
 			gameState.tradeDeck.add(testCard);
 		}
 		for (int i = 0; i < 10; i ++)
@@ -60,5 +64,6 @@ public class StarRealms extends ApplicationAdapter {
 	public void dispose ()
 	{
 		batch.dispose();
+		assets.dispose();
 	}
 }

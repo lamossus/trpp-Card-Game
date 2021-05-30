@@ -45,6 +45,7 @@ public class GameState {
         {
             if (tradeRow[i] == card)
             {
+                card.remove();
                 tradeRow[i] = null;
                 break;
             }
