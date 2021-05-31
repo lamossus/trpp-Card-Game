@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -18,6 +15,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.PlayerState;
+
+import java.util.function.Function;
 
 /**
  * Класс, описывающий свойства карты.
@@ -113,7 +112,8 @@ public class Card extends Actor {
                 final TextButton trash = new TextButton(trashEffect != null ? trashEffect.getEffectText() : "There is no trash effect on this card.", skin);
                 final TextButton cancel = new TextButton("Cancel", skin);
 
-
+                for (Actor actor : StarRealms.stage.getActors())
+                    actor.setTouchable(Touchable.disabled);
                 StarRealms.stage.addActor(buttons);
 
                 main.setPosition(width/2f, height/2f + 100, Align.center);
@@ -122,6 +122,8 @@ public class Card extends Actor {
                     public void clicked(InputEvent event, float x, float y) {
                         mainEffect.activate(); // Добавленной кнопки добавляется соответствующий функционал
                         buttons.remove();
+                        for (Actor actor : StarRealms.stage.getActors())
+                            actor.setTouchable(Touchable.enabled);
                     }
                 });
 
@@ -132,6 +134,8 @@ public class Card extends Actor {
                         public void clicked(InputEvent event, float x, float y) {
                             allyEffect.activate();
                             buttons.remove();
+                            for (Actor actor : StarRealms.stage.getActors())
+                                actor.setTouchable(Touchable.enabled);
                         }
                     });
                 else
@@ -145,6 +149,8 @@ public class Card extends Actor {
                         public void clicked(InputEvent event, float x, float y) {
                             trashEffect.activate();
                             buttons.remove();
+                            for (Actor actor : StarRealms.stage.getActors())
+                                actor.setTouchable(Touchable.enabled);
                         }
                     });
                 else
@@ -156,6 +162,8 @@ public class Card extends Actor {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         buttons.remove();
+                        for (Actor actor : StarRealms.stage.getActors())
+                            actor.setTouchable(Touchable.enabled);
                     }
                 });
 
