@@ -35,7 +35,7 @@ public class Base extends Card {
 
         setScale(0.7f);
         int playedCards = StarRealms.playerState.playedCards.size();
-        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
+        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomRight); // Расположить карту над рукой. Надо бы сделать покрасивше
         StarRealms.playerState.bases.add(this);
 
         StarRealms.playerState.hand.remove(baseInfo);
