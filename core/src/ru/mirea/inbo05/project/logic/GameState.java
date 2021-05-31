@@ -6,17 +6,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Card;
+import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
 import java.util.List;
 import java.util.Stack;
 
 public class GameState {
     /** Колода торгового ряда */
-    public Stack<Card> tradeDeck = new Stack<>();
+    public Stack<CardInfo> tradeDeck = new Stack<>();
     /** Торговый ряд */
-    Card[] tradeRow = new Card[5];
+    CardInfo[] tradeRow = new CardInfo[5];
     /** Карты в утиле */
-    public List<Card> trash;
+    public List<CardInfo> trash;
     /** Количество доступных исследователей */
     private int explorerQuantity;
 
@@ -35,8 +36,8 @@ public class GameState {
         {
             if (tradeRow[i] == null)
             {
-                final Card card = tradeDeck.pop();
-                tradeRow[i] = card;
+                tradeRow[i] = tradeDeck.pop();
+                final Card card = new Card(tradeRow[i]);
                 card.setPosition(200 + i * 240, 900, Align.center);
 
                 card.addListener(new ClickListener() {
@@ -56,7 +57,7 @@ public class GameState {
     {
         for (int i = 0; i < 5; i ++)
         {
-            if (tradeRow[i] == card)
+            if (tradeRow[i] == card.getCardInfo())
             {
                 card.remove();
                 tradeRow[i] = null;
@@ -69,11 +70,12 @@ public class GameState {
     /** Купить карту из торгового ряда */
     public void buy(Card card) {
         PlayerState playerState = StarRealms.playerState;
-        if (card.getCost() <= playerState.getMoney()) {
+        int cost = card.getCardInfo().cost;
+        if (cost <= playerState.getMoney()) {
             StarRealms.gameState.removeFromCardRow(card);
 
             playerState.discard(card);
-            playerState.setMoney(playerState.getMoney() - card.getCost());
+            playerState.setMoney(playerState.getMoney() - cost);
         }
     }
 

@@ -4,9 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Base;
 import ru.mirea.inbo05.project.logic.cards.Card;
+import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +21,24 @@ public class PlayerState {
     /** Очки атаки игрока */
     private int attack = 0;
     /** Колода игрока */
-    public List<Card> deck = new ArrayList<>();
+    public List<CardInfo> deck = new ArrayList<>();
     /** Сброс игрока */
-    public List<Card> discardDeck = new ArrayList<>();
+    public List<CardInfo> discardDeck = new ArrayList<>();
     /** Рука игрока */
-    public List<Card> hand = new ArrayList<>();
+    public List<CardInfo> hand = new ArrayList<>();
     /** Разыгранные карты игрока */
-    public List<Card> playedCards = new ArrayList<>();
+    public List<CardInfo> playedCards = new ArrayList<>();
     /** Разыгранные базы игрока */
     public List<Base> bases = new ArrayList<>();
 
     /** Группа элементов в руке */
+    @JsonIgnore
     public Group handGroup;
     /** Группа элементов среди разыгранных карт */
+    @JsonIgnore
     public Group playedCardsGroup;
     /** Группа элементов среди баз */
+    @JsonIgnore
     public Group basesGroup;
 
     public PlayerState() {
@@ -70,14 +75,15 @@ public class PlayerState {
     public void discard(Card card)
     {
         card.clearListeners();
-        discardDeck.add(card);
+        discardDeck.add(card.getCardInfo());
+        card.getCardInfo().instance = null;
         card.remove();
     }
 
     /** Перемешать сброс */
     private void shuffle() {
         int index;
-        Card temp;
+        CardInfo temp;
         for (int i = 0; i < discardDeck.size(); i++) {
             index = (int) (Math.random() * (discardDeck.size() - i)) + i;
             temp = discardDeck.get(i);
@@ -93,9 +99,10 @@ public class PlayerState {
             deck.addAll(discardDeck);
             discardDeck.clear();
         }
-        final Card card = deck.get(0);
+        CardInfo cardInfo = deck.get(0);
+        final Card card = new Card(cardInfo);
         card.setScale(0.8f);
-        hand.add(card);
+        hand.add(cardInfo);
         deck.remove(0);
 
         card.addListener( new ClickListener(){
@@ -115,9 +122,10 @@ public class PlayerState {
     void repositionCardsInHand()
     {
         int index = 0;
-        for (Card card : hand)
+        for (CardInfo card : hand)
         {
-            card.setPosition(index * card.getWidth() * card.getScaleX(), 0, Align.bottomLeft);
+            Card cardInstance = card.instance;
+            cardInstance.setPosition(index * cardInstance.getWidth() * cardInstance.getScaleX(), 0, Align.bottomLeft);
             index++;
         }
     }

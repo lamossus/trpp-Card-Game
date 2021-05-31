@@ -11,6 +11,10 @@ public class Base extends Card {
     /** Является ли карта авангардом */
     private boolean isTaunt;
 
+    public Base(CardInfo cardInfo) {
+        super(cardInfo);
+    }
+
     public int getHealth() {
         return health;
     }

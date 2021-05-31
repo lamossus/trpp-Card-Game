@@ -11,10 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.mirea.inbo05.project.logic.GameState;
 import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.Card;
+import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class StarRealms extends ApplicationAdapter {
@@ -48,12 +52,12 @@ public class StarRealms extends ApplicationAdapter {
 
 		for (int i = 0; i < 30; i ++)
 		{
-			final Card testCard = new Card(rand.nextInt() % 2 == 0 ? "alliance-transport.jpg" : "trade-star.jpg");
+			final CardInfo testCard = new CardInfo(rand.nextInt() % 2 == 0 ? "alliance-transport.jpg" : "trade-star.jpg");
 			gameState.tradeDeck.add(testCard);
 		}
 		for (int i = 0; i < 10; i ++)
 		{
-			final Card testCard = new Card("alliance-transport.jpg");
+			final CardInfo testCard = new CardInfo("alliance-transport.jpg");
 			playerState.deck.add(testCard);
 		}
 		for (int i = 0; i < 5; i++)
@@ -71,12 +75,12 @@ public class StarRealms extends ApplicationAdapter {
 				playerState.setMoney(0);
 				playerState.setAttack(0);
 
-				for (Card card : playerState.playedCards)
-					playerState.discard(card);
+				for (CardInfo card : playerState.playedCards)
+					playerState.discard(card.instance);
 				playerState.playedCards.clear();
 
-				for (Card card : playerState.hand)
-					playerState.discard(card);
+				for (CardInfo card : playerState.hand)
+					playerState.discard(card.instance);
 				playerState.hand.clear();
 
 				while (playerState.hand.size() < 5) {
