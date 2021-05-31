@@ -21,9 +21,9 @@ public class StarRealms extends ApplicationAdapter {
 	public static Assets assets;
 	public static Stage stage;
 
-	public static PlayerState playerState = new PlayerState();
-	public static PlayerState enemyState = new PlayerState();
-	public static GameState gameState = new GameState();
+	public static PlayerState playerState;
+	public static PlayerState enemyState;
+	public static GameState gameState;
 
 	static int width;
 	static int height;
@@ -36,6 +36,9 @@ public class StarRealms extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		assets = new Assets();
 		stage = new Stage(new ScreenViewport());
+		playerState = new PlayerState();
+		enemyState = new PlayerState();
+		gameState = new GameState();
 
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();

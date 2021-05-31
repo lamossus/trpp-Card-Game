@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -27,6 +28,22 @@ public class PlayerState {
     public List<Card> playedCards = new ArrayList<>();
     /** Разыгранные базы игрока */
     public List<Base> bases = new ArrayList<>();
+
+    /** Группа элементов в руке */
+    public Group handGroup;
+    /** Группа элементов среди разыгранных карт */
+    public Group playedCardsGroup;
+    /** Группа элементов среди баз */
+    public Group basesGroup;
+
+    public PlayerState() {
+        handGroup = new Group();
+        playedCardsGroup = new Group();
+        basesGroup = new Group();
+        StarRealms.stage.addActor(handGroup);
+        StarRealms.stage.addActor(playedCardsGroup);
+        StarRealms.stage.addActor(basesGroup);
+    }
 
     public int getHealth() {
         return health;
@@ -91,7 +108,7 @@ public class PlayerState {
 
         repositionCardsInHand();
 
-        StarRealms.stage.addActor(card);
+        handGroup.addActor(card);
     }
 
     /** Разместить карты в руке по порядку */

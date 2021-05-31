@@ -6,14 +6,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import ru.mirea.inbo05.project.StarRealms;
+import ru.mirea.inbo05.project.logic.PlayerState;
 
 /**
  * Класс, описывающий свойства карты.
@@ -79,6 +83,7 @@ public class Card extends Actor {
     public void play()
     {
         clearListeners(); // Очистить список слушателей, чтобы разыгранную карту нельзя было разыграть ещё раз
+        remove();
 
         setScale(0.7f);
         int playedCards = StarRealms.playerState.playedCards.size();
@@ -86,65 +91,78 @@ public class Card extends Actor {
         StarRealms.playerState.playedCards.add(this);
         StarRealms.playerState.hand.remove(this);
 
+        StarRealms.playerState.playedCardsGroup.addActor(this);
+        createEffectButtons();
+    }
+
+    void createEffectButtons()
+    {
         addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) { // Теперь карта это кнопка, нажатие которой вызывает ещё 4 кнопки - основной, союзный и эффект утиля, а также кнопка отмены
-                super.clicked(event, x, y);
                 Skin skin = StarRealms.assets.getSkin();
 
                 int width = Gdx.graphics.getWidth();
                 int height = Gdx.graphics.getHeight();
 
+                final Group buttons = new Group();
+
                 final TextButton main = new TextButton(mainEffect.getEffectText(), skin);
+                final TextButton ally = new TextButton(allyEffect != null ? allyEffect.getEffectText() : "There is no ally effect on this card.", skin);
+                final TextButton trash = new TextButton(trashEffect != null ? trashEffect.getEffectText() : "There is no trash effect on this card.", skin);
+                final TextButton cancel = new TextButton("Cancel", skin);
+
+
+                StarRealms.stage.addActor(buttons);
+
                 main.setPosition(width/2f, height/2f + 100, Align.center);
                 main.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         mainEffect.activate(); // Добавленной кнопки добавляется соответствующий функционал
+                        buttons.remove();
                     }
                 });
-                StarRealms.stage.addActor(main);
 
-                final TextButton ally = new TextButton(allyEffect != null ? allyEffect.getEffectText() : "There is no ally effect on this card.", skin);
                 ally.setPosition(width/2f, height/2f + 50, Align.center);
                 if (allyEffect != null)
                     ally.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             allyEffect.activate();
+                            buttons.remove();
                         }
                     });
                 else
                     ally.setColor(new Color(1,1,1,0.5f));
-                StarRealms.stage.addActor(ally);
 
 
-                final TextButton trash = new TextButton(trashEffect != null ? trashEffect.getEffectText() : "There is no trash effect on this card.", skin);
                 trash.setPosition(width/2f, height/2f, Align.center);
                 if (trashEffect != null)
                     trash.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             trashEffect.activate();
+                            buttons.remove();
                         }
                     });
                 else
                     trash.setColor(new Color(1,1,1,0.5f));
-                StarRealms.stage.addActor(trash);
 
-                final TextButton cancel = new TextButton("Cancel", skin);
+
                 cancel.setPosition(width/2f, height/2f - 50, Align.center);
                 cancel.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        main.remove(); // Кнопка отмены убирает все остальные кнопки
-                        ally.remove();
-                        trash.remove();
-                        cancel.remove();
+                        buttons.remove();
                     }
                 });
-                StarRealms.stage.addActor(cancel);
+
+                buttons.addActor(main);
+                buttons.addActor(ally);
+                buttons.addActor(trash);
+                buttons.addActor(cancel);
             }
         });
     }

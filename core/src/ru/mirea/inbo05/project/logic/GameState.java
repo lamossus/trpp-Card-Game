@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -19,6 +20,14 @@ public class GameState {
     /** Количество доступных исследователей */
     private int explorerQuantity;
 
+    /** Группа элементов торгового ряда */
+    public Group tradeRowGroup;
+
+    public GameState() {
+        tradeRowGroup = new Group();
+        StarRealms.stage.addActor(tradeRowGroup);
+    }
+
     /** Пополнить торговый ряд */
     public void refill()
     {
@@ -36,7 +45,7 @@ public class GameState {
                         buy(card);
                     }
                 });
-                StarRealms.stage.addActor(card);
+                tradeRowGroup.addActor(card);
             }
         }
 
