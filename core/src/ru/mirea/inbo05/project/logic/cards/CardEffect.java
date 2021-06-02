@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic.cards;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.mirea.inbo05.project.logic.commands.Command;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class CardEffect {
     /** Список выполняемых комманд */
     private List<Command> commands = new ArrayList<>();
     /** Использован ли этот эффект */
+    @JsonIgnore
     private boolean isActive = true;
     /** Текст, отображаемый при активации */
     private String effectText = "Test effect";
@@ -23,9 +25,6 @@ public class CardEffect {
                 success = command.execute();
             }
         }
-    }
-    public boolean isActive() {
-        return isActive;
     }
     public String getEffectText() {
         return effectText;
