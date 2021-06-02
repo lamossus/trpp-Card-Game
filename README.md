@@ -30,5 +30,5 @@ api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
 api "com.badlogicgames.gdx:gdx:$gdxVersion"
 api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
 ```
-## Команда для запуска
-gradle run
+## Инструкции к запуску
+Нужно лишь открыть соответствующий .jar файл при помощи JavaLauncher(стоит по умолчанию). 
