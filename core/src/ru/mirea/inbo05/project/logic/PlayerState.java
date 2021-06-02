@@ -83,7 +83,7 @@ public class PlayerState {
     }
 
     /** Перемешать сброс */
-    private void shuffle() {
+    public void shuffle() {
         int index;
         CardInfo temp;
         for (int i = 0; i < discardDeck.size(); i++) {

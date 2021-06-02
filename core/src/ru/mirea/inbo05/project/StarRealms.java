@@ -70,6 +70,10 @@ public class StarRealms extends ApplicationAdapter {
 			e.printStackTrace();
 		}
 
+		playerState.shuffle();
+		enemyState.shuffle();
+
+
 		for (int i = 0; i < 3; i++)
 			playerState.draw();
 
