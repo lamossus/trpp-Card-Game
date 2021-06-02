@@ -9,7 +9,7 @@ public class GetMoneyCommand implements Command {
 
     @Override
     public boolean execute() {
-        StarRealms.playerState.setMoney(StarRealms.playerState.getMoney() + money);
+        StarRealms.setMoney(StarRealms.playerState.getMoney() + money);
         return true;
     }
 }

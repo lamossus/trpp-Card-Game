@@ -21,7 +21,9 @@ public class GameState {
     /** Карты в утиле */
     public List<CardInfo> trash;
     /** Количество доступных исследователей */
-    private int explorerQuantity;
+    private int explorerQuantity = 12;
+    /** Шаблон исследователя */
+    private CardInfo explorerTemplate;
 
     /** Группа элементов торгового ряда */
     @JsonIgnore
@@ -80,7 +82,7 @@ public class GameState {
             StarRealms.gameState.removeFromCardRow(card);
 
             playerState.discard(card);
-            playerState.setMoney(playerState.getMoney() - cost);
+            StarRealms.setMoney(playerState.getMoney() - cost);
         }
     }
 

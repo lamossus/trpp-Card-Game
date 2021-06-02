@@ -9,7 +9,7 @@ public class HealCommand implements Command {
 
     @Override
     public boolean execute() {
-        StarRealms.playerState.setHealth(StarRealms.playerState.getHealth() + healAmount);
+        StarRealms.setHealth(StarRealms.playerState.getHealth() + healAmount);
         return true;
     }
 }

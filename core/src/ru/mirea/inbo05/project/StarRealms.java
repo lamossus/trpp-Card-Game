@@ -40,6 +40,8 @@ public class StarRealms extends ApplicationAdapter {
 	SpriteBatch batch;
 	Color test = new Color((float) 0.537, (float) 0.756, (float) 0.439, (float) 0.5);
 
+	static TextButton healthPoints, enemyHealthPoints, moneyPoints, attackPoints;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -79,8 +81,8 @@ public class StarRealms extends ApplicationAdapter {
 		endTurn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				playerState.setMoney(0);
-				playerState.setAttack(0);
+				setMoney(0);
+				setAttack(0);
 
 				for (CardInfo card : playerState.playedCards)
 					playerState.discard(card.instance);
@@ -96,23 +98,23 @@ public class StarRealms extends ApplicationAdapter {
 			}
 		});
 
-		final TextButton healthPoints = new TextButton("Health: " + playerState.getHealth(), assets.getSkin());
+		healthPoints = new TextButton("Health: " + playerState.getHealth(), assets.getSkin());
 		healthPoints.setTransform(true);
 		healthPoints.setScale(2);
 		healthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), 0,  Align.bottomRight);
 
-		final TextButton moneyPoints = new TextButton("Money: " + playerState.getMoney(), assets.getSkin());
+		moneyPoints = new TextButton("Money: " + playerState.getMoney(), assets.getSkin());
 		moneyPoints.setTransform(true);
 		moneyPoints.setScale(2);
 		moneyPoints.setPosition(endTurn.getX() - (moneyPoints.getScaleX() - 1) * moneyPoints.getWidth(), healthPoints.getHeight() * healthPoints.getScaleY(),  Align.bottomRight);
 
-		final TextButton attackPoints = new TextButton("Attack: " + playerState.getAttack(), assets.getSkin());
+		attackPoints = new TextButton("Attack: " + playerState.getAttack(), assets.getSkin());
 		attackPoints.setTransform(true);
 		attackPoints.setScale(2);
 		attackPoints.setPosition(endTurn.getX() - (moneyPoints.getScaleX() - 1) * moneyPoints.getWidth(), healthPoints.getHeight() * healthPoints.getScaleY() + moneyPoints.getHeight() * moneyPoints.getScaleY(),  Align.bottomRight);
 
 
-		final TextButton enemyHealthPoints = new TextButton("Health: " + enemyState.getHealth(), assets.getSkin());
+		enemyHealthPoints = new TextButton("Health: " + enemyState.getHealth(), assets.getSkin());
 		enemyHealthPoints.setTransform(true);
 		enemyHealthPoints.setScale(2);
 		enemyHealthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), height - enemyHealthPoints.getHeight() * enemyHealthPoints.getScaleY(),  Align.bottomRight);
@@ -140,5 +142,26 @@ public class StarRealms extends ApplicationAdapter {
 	{
 		batch.dispose();
 		assets.dispose();
+	}
+
+	public static void setHealth(int health)
+	{
+		playerState.setHealth(health);
+		healthPoints.setText("Health: " + playerState.getHealth());
+	}
+	public static void setEnemyHealth(int health)
+	{
+		enemyState.setHealth(health);
+		enemyHealthPoints.setText("Health: " + enemyState.getHealth());
+	}
+	public static void setMoney(int money)
+	{
+		playerState.setMoney(money);
+		moneyPoints.setText("Money: " + playerState.getMoney());
+	}
+	public static void setAttack(int attack)
+	{
+		playerState.setAttack(attack);
+		attackPoints.setText("Attack: " + playerState.getAttack());
 	}
 }

@@ -9,7 +9,7 @@ public class GetAttackPointsCommand implements Command {
 
     @Override
     public boolean execute() {
-        StarRealms.playerState.setAttack(StarRealms.playerState.getAttack() + attackPoints);
+        StarRealms.setAttack(StarRealms.playerState.getAttack() + attackPoints);
         return true;
     }
 }

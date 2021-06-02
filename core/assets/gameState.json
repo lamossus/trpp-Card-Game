@@ -669,5 +669,34 @@
         }
     ],
     "trash":null,
-    "explorerQuantity":0
+    "explorerQuantity":12,
+	"explorerTemplate":
+	{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":2,
+            "faction":null,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Explorer.png"
+        }
+	}
 }

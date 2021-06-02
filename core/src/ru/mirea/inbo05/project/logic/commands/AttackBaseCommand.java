@@ -34,7 +34,7 @@ public class AttackBaseCommand implements Command {
             enemyState.bases.remove(target);
             enemyState.discard(target.instance);
 
-            playerState.setAttack(playerState.getAttack() - target.health);
+            StarRealms.setAttack(playerState.getAttack() - target.health);
             return true;
         }
 
