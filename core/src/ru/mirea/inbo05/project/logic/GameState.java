@@ -87,6 +87,17 @@ public class GameState {
         }
     }
 
+    public void shuffle() {
+        int index;
+        CardInfo temp;
+        for (int i = 0; i < tradeDeck.size(); i++) {
+            index = (int) (Math.random() * (tradeDeck.size() - i)) + i;
+            temp = tradeDeck.get(i);
+            tradeDeck.set(i, tradeDeck.get(index));
+            tradeDeck.set(index, temp);
+        }
+    }
+
     public int getExplorerQuantity() {
         return explorerQuantity;
     }
