@@ -90,7 +90,7 @@ public class StarRealms extends ApplicationAdapter {
 					playerState.discard(card.instance);
 				playerState.hand.clear();
 
-				while (playerState.hand.size() < 5) {
+				while (playerState.hand.size() < 5 && !(playerState.discardDeck.isEmpty() && playerState.deck.isEmpty())) {
 					playerState.draw();
 				}
 			}

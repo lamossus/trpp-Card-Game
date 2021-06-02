@@ -95,6 +95,9 @@ public class PlayerState {
 
     /** Вытянуть карту из колоды */
     public void draw() {
+        if (deck.isEmpty() && discardDeck.isEmpty())
+            return;
+
         if (deck.isEmpty()) {
             shuffle();
             deck.addAll(discardDeck);
