@@ -44,14 +44,14 @@ public class StarRealms extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
+
 		batch = new SpriteBatch();
 		assets = new Assets();
 		stage = new Stage(new ScreenViewport());
 		playerState = new PlayerState();
 		enemyState = new PlayerState();
 		gameState = new GameState();
-
-		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
 
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
