@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic.commands;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -74,8 +75,8 @@ public class ScrapCommand implements Command {
             scrollTable.add(card);
             scrollTable.row();
         }
-        scrollPane.setHeight(1080f);
-        scrollPane.setWidth(1920f);
+        scrollPane.setHeight(Gdx.graphics.getHeight());
+        scrollPane.setWidth(Gdx.graphics.getWidth());
         StarRealms.stage.addActor(scrollPane);
         return true;
     }
