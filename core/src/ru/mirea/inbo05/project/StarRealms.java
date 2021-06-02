@@ -93,7 +93,16 @@ public class StarRealms extends ApplicationAdapter {
 				setAttack(0);
 
 				for (CardInfo card : playerState.playedCards)
+				{
+					if(card.mainEffect != null)
+						card.mainEffect.setActive(true);
+					if(card.allyEffect != null)
+						card.allyEffect.setActive(true);
+					if(card.trashEffect != null)
+						card.trashEffect.setActive(true);
 					playerState.discard(card.instance);
+				}
+
 				playerState.playedCards.clear();
 
 				for (CardInfo card : playerState.hand)
