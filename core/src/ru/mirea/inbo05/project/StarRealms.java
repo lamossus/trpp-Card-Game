@@ -13,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.mirea.inbo05.project.logic.GameState;
 import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.BaseInfo;
@@ -51,29 +54,18 @@ public class StarRealms extends ApplicationAdapter {
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
 
-		// Тестовое, потом удалить
-		Random rand = new Random();
+		ObjectMapper om = new ObjectMapper();
+		om.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
-		for (int i = 0; i < 30; i ++)
-		{
-			int random = rand.nextInt() % 2;
-			if (random == 1)
-			{
-				final CardInfo testCard = new CardInfo("Corvette.png");
-				gameState.tradeDeck.add(testCard);
-			}
-			else
-			{
-				final BaseInfo testCard = new BaseInfo("Capitol World.png");
-				gameState.tradeDeck.add(testCard);
-			}
+		try {
+			playerState = om.readValue(new File("playerState.json"), PlayerState.class);
+			enemyState = om.readValue(new File("playerState.json"), PlayerState.class);
+			gameState = om.readValue(new File("gameState.json"), GameState.class);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		for (int i = 0; i < 10; i ++)
-		{
-			final CardInfo testCard = new CardInfo("Scout.png");
-			playerState.deck.add(testCard);
-		}
-		for (int i = 0; i < 5; i++)
+
+		for (int i = 0; i < 3; i++)
 			playerState.draw();
 
 		gameState.refill();
@@ -125,17 +117,11 @@ public class StarRealms extends ApplicationAdapter {
 		enemyHealthPoints.setScale(2);
 		enemyHealthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), height - enemyHealthPoints.getHeight() * enemyHealthPoints.getScaleY(),  Align.bottomRight);
 
-
-
-
 		StarRealms.stage.addActor(endTurn);
 		StarRealms.stage.addActor(healthPoints);
 		StarRealms.stage.addActor(moneyPoints);
 		StarRealms.stage.addActor(enemyHealthPoints);
 		StarRealms.stage.addActor(attackPoints);
-
-
-
 	}
 
 	@Override

@@ -3,16 +3,17 @@ package ru.mirea.inbo05.project.logic.commands;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.Base;
+import ru.mirea.inbo05.project.logic.cards.BaseInfo;
 
 // TODO командами должны быть только возможные эффекты карт, соответственно это всё надо переделать в метод GameState или PlayerState
 
 /** Команда для атаки вражеской базы */
 public class AttackBaseCommand implements Command {
     /** Атакуемая база */
-    private Base target;
+    private BaseInfo target;
 
-    public Base setTarget() {
-        return target;
+    public void setTarget(BaseInfo baseInfo) {
+        target = baseInfo;
     }
 
     @Override
@@ -22,18 +23,18 @@ public class AttackBaseCommand implements Command {
 
         for (int i = 0; i < enemyState.bases.size(); i++)
         {
-            Base base = enemyState.bases.get(i);
-            if (base.isTaunt() && base != target)
+            BaseInfo base = enemyState.bases.get(i);
+            if (base.isTaunt && base != target)
                 return false;
         }
 
-        if (target.getHealth() <= playerState.getAttack())
+        if (target.health <= playerState.getAttack())
         {
-            target.remove();
+            target.instance.remove();
             enemyState.bases.remove(target);
-            enemyState.discard(target);
+            enemyState.discard(target.instance);
 
-            playerState.setAttack(playerState.getAttack() - target.getHealth());
+            playerState.setAttack(playerState.getAttack() - target.health);
             return true;
         }
 

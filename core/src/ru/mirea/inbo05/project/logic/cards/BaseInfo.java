@@ -4,10 +4,6 @@ public class BaseInfo extends CardInfo{
     public boolean isTaunt;
     public int health;
 
-    public BaseInfo(String textureName) {
-        super(textureName);
-    }
-
     @Override
     public Card CreateInstance() {
         Base base = new Base(this);

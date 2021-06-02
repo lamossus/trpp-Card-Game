@@ -1,16 +1,14 @@
 package ru.mirea.inbo05.project.logic.cards;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ru.mirea.inbo05.project.StarRealms;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  *  Класс, описывающий свойства карты.
  * Используется для описания карт кораблей, для описания баз используется наследующий класс Base.
  * @see Base
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "className")
 public class CardInfo {
     /** Цена карты в торговом ряду*/
     public int cost = 0;
@@ -27,11 +25,6 @@ public class CardInfo {
 
     @JsonIgnore
     public Card instance;
-
-    // TODO тестовое, удалить
-    public CardInfo(String textureName) {
-        this.textureName = textureName;
-    }
 
     public Card CreateInstance()
     {

@@ -1,0 +1,70 @@
+{
+    "health":50,
+    "money":0,
+    "attack":0,
+    "deck": [
+        {
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":2,
+            "faction":null,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Explorer.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":0,
+            "faction":null,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":null,
+            "textureName":"Scout.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":0,
+            "faction":null,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":1
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":null,
+            "textureName":"Viper.png"
+        }
+    ], 
+    "playedCards":[],
+    "bases":[]
+}

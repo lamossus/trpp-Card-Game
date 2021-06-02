@@ -1,0 +1,673 @@
+{
+    "tradeDeck": [
+        {
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":5,
+            "faction":"MACHINE_CULT",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":4
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.ScrapCommand",
+                            "mask":3,
+                            "may":true
+                        }
+                    ],
+                    "effectText":"You may scrap a card in your hand or discard pile"
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":"Draw a card"
+                },
+            "trashEffect":null,
+            "textureName":"Battle Mech.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":2,
+            "faction":"BLOB",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":4
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.ScrapCommand",
+                            "mask":4,
+                            "may":true
+                        }
+                    ],
+                    "effectText":"You may scrap a card in the trade row"
+                },
+            "allyEffect":
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Battle Pod.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":3,
+            "faction":"MACHINE_CULT",
+            "health":5,
+            "isTaunt":true,
+            "mainEffect":null,
+            "allyEffect":null,
+            "trashEffect": 
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":5
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Battle Station.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":1,
+            "faction":"BLOB",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":"Draw a card"
+                },
+            "trashEffect":null,
+            "textureName":"BLOB Fighter.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":3,
+            "faction":"BLOB",
+            "health":5,
+            "isTaunt":false,
+            "mainEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":1
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect": 
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"BLOB Wheel.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":1,
+            "faction":"MACHINE_CULT",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.ScrapCommand",
+                            "mask":2,
+                            "may":true
+                        }
+                    ],
+                    "effectText":"You may scrap a card in your discard pile"
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Builder Bot.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":8,
+            "faction":"TRADE_FEDERATION",
+            "health":6,
+            "isTaunt":true,
+            "mainEffect": 
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.HealCommand",
+                            "healAmount":6
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":"Draw a card"
+                },
+            "allyEffect":null,
+            "trashEffect":null,
+            "textureName":"Capitol World.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":1,
+            "faction":"STAR_EMPIRE",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Cargo Launch.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":3,
+            "faction":"BLOB",
+            "mainEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Cargo Pob.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":2,
+            "faction":"STAR_EMPIRE",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":1
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":"Draw a card"
+                },
+            "allyEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Corvette.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":4,
+            "faction":"MACHINE_CULT",
+            "health":5,
+            "isTaunt":true,
+            "mainEffect": 
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Defense System.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":7,
+            "faction":"STAR_EMPIRE",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":7
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":"Draw a card"
+                },
+            "allyEffect":null,
+            "trashEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":5
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Dreadnaught.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":2,
+            "faction":"TRADE_FEDERATION",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.HealCommand",
+                            "healAmount":5
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Federal Transport.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":1,
+            "faction":"TRADE_FEDERATION",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.HealCommand",
+                            "healAmount":4
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Federation Shuttle.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":4,
+            "faction":"TRADE_FEDERATION",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":3
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.HealCommand",
+                            "healAmount":4
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":
+                {
+                    "commands":[],
+                    "effectText":"Destroy target base"
+                },
+            "textureName":"Frontier Ferry.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":1,
+            "faction":"TRADE_FEDERATION",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":2
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.HealCommand",
+                            "healAmount":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":null,
+            "textureName":"Frontier Runner.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":5,
+            "faction":"STAR_EMPIRE",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":4
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Imperial Trader.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":2,
+            "faction":"MACHINE_CULT",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":2
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.ScrapCommand",
+                            "mask":2,
+                            "may":true
+                        }
+                    ],
+                    "effectText":"You may scrap a card in your discard pile"
+                },
+            "allyEffect":null,
+            "trashEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Repair Bot.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":4,
+            "faction":"STAR_EMPIRE",
+            "health":4,
+            "isTaunt":true,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect": 
+                {
+                    "commands":[
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":4
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Space Station.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":2,
+            "faction":"BLOB",
+            "health":3,
+            "isTaunt":false,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Spike Cluster.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":5,
+            "faction":"BLOB",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":3
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
+                        }
+                    ],
+                    "effectText":"Draw a card"
+                },
+            "allyEffect":null,
+            "trashEffect": 
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":6
+                        }
+                    ],
+                    "effectText":null
+                },
+            "textureName":"Stellar Ray.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
+            "cost":1,
+            "faction":"MACHINE_CULT",
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":1
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.ScrapCommand",
+                            "mask":3,
+                            "may":true
+                        }
+                    ],
+                    "effectText":"You may scrab a card in your hand or discard pile"
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":2
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"Trade Bot.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":8,
+            "faction":"TRADE_FEDERATION",
+            "health":6,
+            "isTaunt":false,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":3
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":4
+                        },{
+                            "className":"ru.mirea.inbo05.project.logic.commands.HealCommand",
+                            "healAmount":5
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":null,
+            "trashEffect":null,
+            "textureName":"Transit Nexus.png"
+        },{
+			"className":"ru.mirea.inbo05.project.logic.cards.BaseInfo",
+            "cost":5,
+            "faction":"STAR_EMPIRE",
+            "health":4,
+            "isTaunt":true,
+            "mainEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":3
+                        }
+                    ],
+                    "effectText":null
+                },
+            "allyEffect":
+                {
+                    "commands": [
+                        {
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
+                            "attackPoints":4
+                        }
+                    ],
+                    "effectText":null
+                },
+            "trashEffect":null,
+            "textureName":"War World.png"
+        }
+    ],
+    "trash":null,
+    "explorerQuantity":0
+}

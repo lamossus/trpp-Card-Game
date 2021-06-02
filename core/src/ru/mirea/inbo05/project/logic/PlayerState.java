@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Base;
+import ru.mirea.inbo05.project.logic.cards.BaseInfo;
 import ru.mirea.inbo05.project.logic.cards.Card;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
@@ -29,7 +30,7 @@ public class PlayerState {
     /** Разыгранные карты игрока */
     public List<CardInfo> playedCards = new ArrayList<>();
     /** Разыгранные базы игрока */
-    public List<Base> bases = new ArrayList<>();
+    public List<BaseInfo> bases = new ArrayList<>();
 
     /** Группа элементов в руке */
     @JsonIgnore

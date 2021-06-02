@@ -40,8 +40,7 @@ public class Base extends Card {
         setScale(0.55f);
         setRotation(-90);
         setPosition(width - (1 + playedCards) * getHeight() * getScaleY(), height/2f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
-        StarRealms.playerState.bases.add(this);
-
+        StarRealms.playerState.bases.add((BaseInfo) cardInfo);
         StarRealms.playerState.hand.remove(cardInfo);
 
         StarRealms.playerState.basesGroup.addActor(this);
