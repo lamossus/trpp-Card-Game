@@ -2,6 +2,7 @@ package ru.mirea.inbo05.project;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -44,6 +45,8 @@ public class StarRealms extends ApplicationAdapter {
 		playerState = new PlayerState();
 		enemyState = new PlayerState();
 		gameState = new GameState();
+
+		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
 
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
@@ -100,26 +103,24 @@ public class StarRealms extends ApplicationAdapter {
 				}
 			}
 		});
-		/**
-		 * Счетчик здоровья
-		 */
-		final TextButton healthPoints = new TextButton("Health: " + String.valueOf(playerState.getHealth()), assets.getSkin());
+
+		final TextButton healthPoints = new TextButton("Health: " + playerState.getHealth(), assets.getSkin());
 		healthPoints.setTransform(true);
 		healthPoints.setScale(2);
 		healthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), 0,  Align.bottomRight);
 
-		final TextButton moneyPoints = new TextButton("Money: " + String.valueOf(playerState.getMoney()), assets.getSkin());
+		final TextButton moneyPoints = new TextButton("Money: " + playerState.getMoney(), assets.getSkin());
 		moneyPoints.setTransform(true);
 		moneyPoints.setScale(2);
 		moneyPoints.setPosition(endTurn.getX() - (moneyPoints.getScaleX() - 1) * moneyPoints.getWidth(), healthPoints.getHeight() * healthPoints.getScaleY(),  Align.bottomRight);
 
-		final TextButton attackPoints = new TextButton("Attack: " + String.valueOf(playerState.getAttack()), assets.getSkin());
+		final TextButton attackPoints = new TextButton("Attack: " + playerState.getAttack(), assets.getSkin());
 		attackPoints.setTransform(true);
 		attackPoints.setScale(2);
 		attackPoints.setPosition(endTurn.getX() - (moneyPoints.getScaleX() - 1) * moneyPoints.getWidth(), healthPoints.getHeight() * healthPoints.getScaleY() + moneyPoints.getHeight() * moneyPoints.getScaleY(),  Align.bottomRight);
 
 
-		final TextButton enemyHealthPoints = new TextButton("Health: " + String.valueOf(enemyState.getHealth()), assets.getSkin());
+		final TextButton enemyHealthPoints = new TextButton("Health: " + enemyState.getHealth(), assets.getSkin());
 		enemyHealthPoints.setTransform(true);
 		enemyHealthPoints.setScale(2);
 		enemyHealthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), height - enemyHealthPoints.getHeight() * enemyHealthPoints.getScaleY(),  Align.bottomRight);
