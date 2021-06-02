@@ -77,17 +77,15 @@ public class StarRealms extends ApplicationAdapter {
 		om.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
 		try {
-			playerState = om.readValue(Gdx.files.local("json/playerState.json").file(), PlayerState.class);
-			enemyState = om.readValue(Gdx.files.local("json/playerState.json").file(), PlayerState.class);
-			gameState = om.readValue(Gdx.files.local("json/gameState.json").file(), GameState.class);
+			playerState = om.readValue(Gdx.files.internal("json/playerState.json").file(), PlayerState.class);
+			enemyState = om.readValue(Gdx.files.internal("json/playerState.json").file(), PlayerState.class);
+			gameState = om.readValue(Gdx.files.internal("json/gameState.json").file(), GameState.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < 3; i++)
 			playerState.draw();
-
-		/*
 
 		gameState.refill();
 
@@ -165,7 +163,7 @@ public class StarRealms extends ApplicationAdapter {
 					}
 				}
 			}
-		});*/
+		});
 	}
 
 	void connect()
