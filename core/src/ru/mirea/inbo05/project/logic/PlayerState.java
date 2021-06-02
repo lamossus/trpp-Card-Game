@@ -122,7 +122,7 @@ public class PlayerState {
     }
 
     /** Разместить карты в руке по порядку */
-    void repositionCardsInHand()
+    public void repositionCardsInHand()
     {
         int index = 0;
         for (CardInfo card : hand)

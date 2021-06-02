@@ -10,6 +10,7 @@ import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Card;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -17,9 +18,9 @@ public class GameState {
     /** Колода торгового ряда */
     public Stack<CardInfo> tradeDeck = new Stack<>();
     /** Торговый ряд */
-    CardInfo[] tradeRow = new CardInfo[5];
+    public CardInfo[] tradeRow = new CardInfo[5];
     /** Карты в утиле */
-    public List<CardInfo> trash;
+    public List<CardInfo> trash = new ArrayList<>();
     /** Количество доступных исследователей */
     private int explorerQuantity = 12;
     /** Шаблон исследователя */
@@ -60,13 +61,13 @@ public class GameState {
     }
 
     /** Удалить карту с торгового ряда */
-    public void removeFromCardRow(Card card)
+    public void removeFromCardRow(CardInfo card)
     {
         for (int i = 0; i < 5; i ++)
         {
-            if (tradeRow[i] == card.getCardInfo())
+            if (tradeRow[i] == card)
             {
-                card.remove();
+                card.instance.remove();
                 tradeRow[i] = null;
                 break;
             }
@@ -79,7 +80,7 @@ public class GameState {
         PlayerState playerState = StarRealms.playerState;
         int cost = card.getCardInfo().cost;
         if (cost <= playerState.getMoney()) {
-            StarRealms.gameState.removeFromCardRow(card);
+            StarRealms.gameState.removeFromCardRow(card.getCardInfo());
 
             playerState.discard(card);
             StarRealms.setMoney(playerState.getMoney() - cost);

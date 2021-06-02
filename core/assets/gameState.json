@@ -668,8 +668,6 @@
             "textureName":"War World.png"
         }
     ],
-    "trash":null,
-    "explorerQuantity":12,
 	"explorerTemplate":
 	{
 			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
