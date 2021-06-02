@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.Card;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
@@ -22,6 +23,7 @@ public class GameState {
     private int explorerQuantity;
 
     /** Группа элементов торгового ряда */
+    @JsonIgnore
     public Group tradeRowGroup;
 
     public GameState() {
