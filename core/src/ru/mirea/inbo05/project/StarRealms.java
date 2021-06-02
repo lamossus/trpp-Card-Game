@@ -78,7 +78,9 @@ public class StarRealms extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 
 		final TextButton endTurn = new TextButton("End turn", assets.getSkin());
-		endTurn.setPosition(width, height/2f + 10, Align.right);
+		endTurn.setTransform(true);
+		endTurn.setScale(2);
+		endTurn.setPosition(width - (endTurn.getScaleX() - 1) * endTurn.getWidth(), 0, Align.bottomRight);
 		endTurn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {

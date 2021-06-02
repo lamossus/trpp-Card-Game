@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -16,25 +17,20 @@ import ru.mirea.inbo05.project.StarRealms;
 /**
  * Класс, представляющий собой кнопку, созданную на основе информации о карте
  */
-public class Card extends Actor {
+public class Card extends Image {
     /** Информация о карте */
     protected CardInfo cardInfo;
     /** Спрайт */
-    protected Drawable sprite;
+    //protected Drawable sprite;
 
     public Card(CardInfo cardInfo)
     {
         this.cardInfo = cardInfo;
         Texture texture = StarRealms.assets.getTexture(cardInfo.textureName);
-        sprite = new TextureRegionDrawable(texture);
+        setDrawable(new TextureRegionDrawable(texture));
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
         setScale(0.7f);
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        sprite.draw(batch, getX(), getY(), getWidth() * getScaleX(), getHeight() * getScaleY());
     }
 
     /** Разыграть карту из руки и активировать её эффекты при разыгрывании */
@@ -45,7 +41,7 @@ public class Card extends Actor {
 
         setScale(0.6f);
         int playedCards = StarRealms.playerState.playedCards.size();
-        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
+        setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.7f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
         StarRealms.playerState.playedCards.add(cardInfo);
         StarRealms.playerState.hand.remove(cardInfo);
 

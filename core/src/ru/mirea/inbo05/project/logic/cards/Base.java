@@ -1,6 +1,7 @@
 package ru.mirea.inbo05.project.logic.cards;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import ru.mirea.inbo05.project.StarRealms;
@@ -32,11 +33,13 @@ public class Base extends Card {
         remove();
 
         int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
 
-        setScale(0.7f);
         int playedCards = StarRealms.playerState.bases.size();
-        setRotation(90);
-        setPosition( width - playedCards * getHeight() * getScaleY(), getWidth(), Align.topRight); // Расположить карту над рукой. Надо бы сделать покрасивше
+
+        setScale(0.55f);
+        setRotation(-90);
+        setPosition(width - (1 + playedCards) * getHeight() * getScaleY(), height/2f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
         StarRealms.playerState.bases.add(this);
 
         StarRealms.playerState.hand.remove(cardInfo);
