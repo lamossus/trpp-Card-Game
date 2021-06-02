@@ -100,7 +100,41 @@ public class StarRealms extends ApplicationAdapter {
 				}
 			}
 		});
+		/**
+		 * Счетчик здоровья
+		 */
+		final TextButton healthPoints = new TextButton("Health: " + String.valueOf(playerState.getHealth()), assets.getSkin());
+		healthPoints.setTransform(true);
+		healthPoints.setScale(2);
+		healthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), 0,  Align.bottomRight);
+
+		final TextButton moneyPoints = new TextButton("Money: " + String.valueOf(playerState.getMoney()), assets.getSkin());
+		moneyPoints.setTransform(true);
+		moneyPoints.setScale(2);
+		moneyPoints.setPosition(endTurn.getX() - (moneyPoints.getScaleX() - 1) * moneyPoints.getWidth(), healthPoints.getHeight() * healthPoints.getScaleY(),  Align.bottomRight);
+
+		final TextButton attackPoints = new TextButton("Attack: " + String.valueOf(playerState.getAttack()), assets.getSkin());
+		attackPoints.setTransform(true);
+		attackPoints.setScale(2);
+		attackPoints.setPosition(endTurn.getX() - (moneyPoints.getScaleX() - 1) * moneyPoints.getWidth(), healthPoints.getHeight() * healthPoints.getScaleY() + moneyPoints.getHeight() * moneyPoints.getScaleY(),  Align.bottomRight);
+
+
+		final TextButton enemyHealthPoints = new TextButton("Health: " + String.valueOf(enemyState.getHealth()), assets.getSkin());
+		enemyHealthPoints.setTransform(true);
+		enemyHealthPoints.setScale(2);
+		enemyHealthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), height - enemyHealthPoints.getHeight() * enemyHealthPoints.getScaleY(),  Align.bottomRight);
+
+
+
+
 		StarRealms.stage.addActor(endTurn);
+		StarRealms.stage.addActor(healthPoints);
+		StarRealms.stage.addActor(moneyPoints);
+		StarRealms.stage.addActor(enemyHealthPoints);
+		StarRealms.stage.addActor(attackPoints);
+
+
+
 	}
 
 	@Override
