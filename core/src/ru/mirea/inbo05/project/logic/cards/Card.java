@@ -3,13 +3,11 @@ package ru.mirea.inbo05.project.logic.cards;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import ru.mirea.inbo05.project.StarRealms;
@@ -20,8 +18,6 @@ import ru.mirea.inbo05.project.StarRealms;
 public class Card extends Image {
     /** Информация о карте */
     protected CardInfo cardInfo;
-    /** Спрайт */
-    //protected Drawable sprite;
 
     public Card(CardInfo cardInfo)
     {
@@ -62,9 +58,27 @@ public class Card extends Image {
 
                 final Group buttons = new Group();
 
-                final TextButton main = new TextButton(cardInfo.mainEffect.getEffectText(), skin);
-                final TextButton ally = new TextButton(cardInfo.allyEffect != null ? cardInfo.allyEffect.getEffectText() : "There is no ally effect on this card.", skin);
-                final TextButton trash = new TextButton(cardInfo.trashEffect != null ? cardInfo.trashEffect.getEffectText() : "There is no trash effect on this card.", skin);
+                boolean otherAlliesPlayed = false;
+
+                for (CardInfo playedCardInfo : StarRealms.playerState.playedCards)
+                {
+                    if (playedCardInfo != cardInfo && playedCardInfo.faction == cardInfo.faction)
+                    {
+                        otherAlliesPlayed = true;
+                        break;
+                    }
+                }
+
+                String mainText = cardInfo.mainEffect != null ? cardInfo.mainEffect.isActive() ? cardInfo.mainEffect.getEffectText() : "Main effect was already activated this turn." : "There is no main effect on this card.";
+                String allyText = cardInfo.allyEffect != null ? cardInfo.allyEffect.isActive() ? otherAlliesPlayed ? cardInfo.allyEffect.getEffectText() : "There are no other allies in play." : "Ally effect was already activated this turn." : "There is no ally effect on this card.";
+                String trashText = cardInfo.trashEffect != null ? cardInfo.trashEffect.getEffectText() : "There is no trash effect on this card.";
+
+                final boolean mainActive = cardInfo.mainEffect != null && cardInfo.mainEffect.isActive();
+                boolean allyActive = cardInfo.allyEffect != null && cardInfo.allyEffect.isActive() && otherAlliesPlayed;
+
+                final TextButton main = new TextButton(mainText, skin);
+                final TextButton ally = new TextButton(allyText, skin);
+                final TextButton trash = new TextButton(trashText, skin);
                 final TextButton cancel = new TextButton("Cancel", skin);
 
                 for (Actor actor : StarRealms.stage.getActors())
@@ -72,18 +86,21 @@ public class Card extends Image {
                 StarRealms.stage.addActor(buttons);
 
                 main.setPosition(width/2f, height/2f + 100, Align.center);
-                main.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        cardInfo.mainEffect.activate(); // Добавленной кнопки добавляется соответствующий функционал
-                        buttons.remove();
-                        for (Actor actor : StarRealms.stage.getActors())
-                            actor.setTouchable(Touchable.enabled);
-                    }
-                });
+                if (mainActive)
+                    main.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            cardInfo.mainEffect.activate(); // Добавленной кнопки добавляется соответствующий функционал
+                            buttons.remove();
+                            for (Actor actor : StarRealms.stage.getActors())
+                                actor.setTouchable(Touchable.enabled);
+                        }
+                    });
+                else
+                    main.setColor(1,1,1,0.5f);
 
                 ally.setPosition(width/2f, height/2f + 50, Align.center);
-                if (cardInfo.allyEffect != null)
+                if (allyActive)
                     ally.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {

@@ -11,7 +11,7 @@ public class CardEffect {
     private List<Command> commands = new ArrayList<>();
     /** Использован ли этот эффект */
     @JsonIgnore
-    private boolean isActive = true;
+    private boolean active = true;
     /** Текст, отображаемый при активации */
     private String effectText = "Test effect";
 
@@ -25,8 +25,12 @@ public class CardEffect {
                 success = command.execute();
             }
         }
+        active = false;
     }
     public String getEffectText() {
         return effectText;
+    }
+    public boolean isActive() {
+        return active;
     }
 }
