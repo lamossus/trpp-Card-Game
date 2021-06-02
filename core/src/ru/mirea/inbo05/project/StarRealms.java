@@ -275,6 +275,8 @@ public class StarRealms extends ApplicationAdapter {
 			for (Actor actor : stage.getActors())
 				actor.remove();
 			TextArea win = new TextArea("You win!", assets.getSkin());
+			win.setPosition(width/2f, height/2f);
+			stage.addActor(win);
 		}
 	}
 	public static void setMoney(int money)
