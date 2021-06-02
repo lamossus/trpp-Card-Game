@@ -1,5 +1,6 @@
 package ru.mirea.inbo05.project.logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -34,13 +35,15 @@ public class GameState {
     /** Пополнить торговый ряд */
     public void refill()
     {
+        int height = Gdx.graphics.getHeight();
+
         for (int i = 0; i < 5; i++)
         {
             if (tradeRow[i] == null)
             {
                 tradeRow[i] = tradeDeck.pop();
-                final Card card = new Card(tradeRow[i]);
-                card.setPosition(200 + i * 240, 900, Align.center);
+                final Card card = tradeRow[i].CreateInstance();
+                card.setPosition(i * card.getWidth() * card.getScaleX(), height + (1 - card.getScaleY()) * card.getHeight(), Align.topLeft);
 
                 card.addListener(new ClickListener() {
                     @Override

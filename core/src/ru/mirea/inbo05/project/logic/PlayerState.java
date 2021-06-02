@@ -100,8 +100,7 @@ public class PlayerState {
             discardDeck.clear();
         }
         CardInfo cardInfo = deck.get(0);
-        final Card card = new Card(cardInfo);
-        card.setScale(0.8f);
+        final Card card = cardInfo.CreateInstance();
         hand.add(cardInfo);
         deck.remove(0);
 

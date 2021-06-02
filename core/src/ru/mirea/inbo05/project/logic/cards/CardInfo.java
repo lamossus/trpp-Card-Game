@@ -1,7 +1,10 @@
 package ru.mirea.inbo05.project.logic.cards;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ru.mirea.inbo05.project.StarRealms;
 
 /**
  *  Класс, описывающий свойства карты.
@@ -28,5 +31,12 @@ public class CardInfo {
     // TODO тестовое, удалить
     public CardInfo(String textureName) {
         this.textureName = textureName;
+    }
+
+    public Card CreateInstance()
+    {
+        Card card = new Card(this);
+        instance = card;
+        return card;
     }
 }

@@ -18,9 +18,9 @@ import ru.mirea.inbo05.project.StarRealms;
  */
 public class Card extends Actor {
     /** Информация о карте */
-    private CardInfo cardInfo;
+    protected CardInfo cardInfo;
     /** Спрайт */
-    private Drawable sprite;
+    protected Drawable sprite;
 
     public Card(CardInfo cardInfo)
     {
@@ -29,8 +29,7 @@ public class Card extends Actor {
         sprite = new TextureRegionDrawable(texture);
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        setScale(0.8f);
-        cardInfo.instance = this;
+        setScale(0.7f);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class Card extends Actor {
         clearListeners(); // Очистить список слушателей, чтобы разыгранную карту нельзя было разыграть ещё раз
         remove();
 
-        setScale(0.7f);
+        setScale(0.6f);
         int playedCards = StarRealms.playerState.playedCards.size();
         setPosition(playedCards * getWidth() * getScaleX(), getHeight() * 0.8f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
         StarRealms.playerState.playedCards.add(cardInfo);

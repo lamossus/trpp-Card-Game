@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import ru.mirea.inbo05.project.logic.GameState;
 import ru.mirea.inbo05.project.logic.PlayerState;
+import ru.mirea.inbo05.project.logic.cards.BaseInfo;
 import ru.mirea.inbo05.project.logic.cards.Card;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
@@ -52,12 +53,21 @@ public class StarRealms extends ApplicationAdapter {
 
 		for (int i = 0; i < 30; i ++)
 		{
-			final CardInfo testCard = new CardInfo(rand.nextInt() % 2 == 0 ? "alliance-transport.jpg" : "trade-star.jpg");
-			gameState.tradeDeck.add(testCard);
+			int random = rand.nextInt() % 2;
+			if (random == 1)
+			{
+				final CardInfo testCard = new CardInfo("Corvette.png");
+				gameState.tradeDeck.add(testCard);
+			}
+			else
+			{
+				final BaseInfo testCard = new BaseInfo("Capitol World.png");
+				gameState.tradeDeck.add(testCard);
+			}
 		}
 		for (int i = 0; i < 10; i ++)
 		{
-			final CardInfo testCard = new CardInfo("alliance-transport.jpg");
+			final CardInfo testCard = new CardInfo("Scout.png");
 			playerState.deck.add(testCard);
 		}
 		for (int i = 0; i < 5; i++)
