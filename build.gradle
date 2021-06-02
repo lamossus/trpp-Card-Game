@@ -73,5 +73,6 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.fasterxml.jackson.core:jackson-databind:2.0.1"
+        implementation "com.esotericsoftware:kryonet:2.22.0-RC1"
     }
 }

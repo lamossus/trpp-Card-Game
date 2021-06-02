@@ -22,15 +22,16 @@ public class PlayerState {
     /** Очки атаки игрока */
     private int attack = 0;
     /** Колода игрока */
-    public List<CardInfo> deck = new ArrayList<>();
+    public ArrayList<CardInfo> deck = new ArrayList<>();
     /** Сброс игрока */
-    public List<CardInfo> discardDeck = new ArrayList<>();
+    public ArrayList<CardInfo> discardDeck = new ArrayList<>();
     /** Рука игрока */
-    public List<CardInfo> hand = new ArrayList<>();
+    public ArrayList<CardInfo> hand = new ArrayList<>();
     /** Разыгранные карты игрока */
-    public List<CardInfo> playedCards = new ArrayList<>();
+    public ArrayList<CardInfo> playedCards = new ArrayList<>();
     /** Разыгранные базы игрока */
-    public List<BaseInfo> bases = new ArrayList<>();
+    public ArrayList<BaseInfo> bases = new ArrayList<>();
+    public boolean yourTurn = false;
 
     /** Группа элементов в руке */
     @JsonIgnore
