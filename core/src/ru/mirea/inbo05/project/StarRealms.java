@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -72,6 +74,7 @@ public class StarRealms extends ApplicationAdapter {
 
 		playerState.shuffle();
 		enemyState.shuffle();
+		gameState.shuffle();
 
 
 		for (int i = 0; i < 3; i++)
@@ -266,6 +269,13 @@ public class StarRealms extends ApplicationAdapter {
 	{
 		enemyState.setHealth(health);
 		enemyHealthPoints.setText("Health: " + enemyState.getHealth());
+
+		if (enemyState.getHealth() <= 0)
+		{
+			for (Actor actor : stage.getActors())
+				actor.remove();
+			TextArea win = new TextArea("You win!", assets.getSkin());
+		}
 	}
 	public static void setMoney(int money)
 	{
