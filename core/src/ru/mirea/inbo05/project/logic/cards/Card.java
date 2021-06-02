@@ -45,7 +45,7 @@ public class Card extends Image {
         createEffectButtons();
     }
 
-    void createEffectButtons()
+    public void createEffectButtons()
     {
         addListener(new ClickListener()
         {

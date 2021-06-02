@@ -6,19 +6,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,13 +20,9 @@ import ru.mirea.inbo05.project.logic.GameState;
 import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.Base;
 import ru.mirea.inbo05.project.logic.cards.BaseInfo;
-import ru.mirea.inbo05.project.logic.cards.Card;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.util.ArrayList;
 
 public class StarRealms extends ApplicationAdapter {
 	public static Assets assets;
@@ -49,13 +39,13 @@ public class StarRealms extends ApplicationAdapter {
 	Color test = new Color((float) 0.537, (float) 0.756, (float) 0.439, (float) 0.5);
 
 	static TextButton healthPoints, enemyHealthPoints, moneyPoints, attackPoints;
-
-	Client client;
-	Server server;
+	Group enemyBases;
 
 	@Override
 	public void create () {
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
+
+		enemyBases = new Group();
 
 		batch = new SpriteBatch();
 		assets = new Assets();
@@ -65,10 +55,6 @@ public class StarRealms extends ApplicationAdapter {
 		height = Gdx.graphics.getHeight();
 
 		Gdx.input.setInputProcessor(stage);
-	}
-
-	void host()
-	{
 		playerState = new PlayerState();
 		enemyState = new PlayerState();
 		gameState = new GameState();
@@ -91,166 +77,7 @@ public class StarRealms extends ApplicationAdapter {
 
 		createButtons();
 
-		server = new Server();
-		server.start();
-		try {
-			server.bind(54555, 54777);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Kryo kryo = server.getKryo();
-		kryo.register(GameStateRequest.class);
-
-		server.addListener(new Listener(){
-			@Override
-			public void received(Connection connection, Object object) {
-				if (object instanceof GameStateRequest)
-				{
-					playerState = ((GameStateRequest) object).enemyState;
-					enemyState = ((GameStateRequest) object).playerState;
-					gameState = ((GameStateRequest) object).gameState;
-
-					ArrayList<BaseInfo> newBases = playerState.bases;
-
-					setHealth(playerState.getHealth());
-					for (Actor actor : playerState.basesGroup.getChildren())
-					{
-						actor.remove();
-						playerState.bases.remove(((Base)actor).getCardInfo());
-					}
-					for (BaseInfo baseInfo : playerState.bases)
-					{
-						baseInfo.instance.play();
-						for (Actor actor : StarRealms.playerState.basesGroup.getChildren())
-							actor.setTouchable(Touchable.disabled);
-					}
-					for (Actor actor : enemyState.basesGroup.getChildren())
-						actor.remove();
-					int i = 0;
-					for (BaseInfo baseInfo : enemyState.bases)
-					{
-						Base base = (Base)baseInfo.instance;
-
-						int width = Gdx.graphics.getWidth();
-						int height = Gdx.graphics.getHeight();
-
-						base.setScale(0.55f);
-						base.setRotation(-90);
-						base.setPosition(width - (1 + i) * base.getHeight() * base.getScaleY(), height/2f + base.getWidth(), Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
-
-						StarRealms.playerState.basesGroup.addActor(base);
-						i++;
-					}
-					i = 0;
-					if (enemyState.yourTurn)
-					{
-						for (CardInfo cardInfo : enemyState.playedCards)
-						{
-							Card card = cardInfo.instance;
-							card.setScale(0.6f);
-							card.setPosition(i * card.getWidth() * card.getScaleX(), card.getHeight() * 0.7f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
-							StarRealms.playerState.playedCards.add(cardInfo);
-							StarRealms.playerState.hand.remove(cardInfo);
-
-							StarRealms.playerState.playedCardsGroup.addActor(card);
-							i++;
-						}
-					}
-					if (playerState.yourTurn)
-					{
-						for (Actor actor : StarRealms.stage.getActors())
-							actor.setTouchable(Touchable.enabled);
-					}
-				}
-			}
-		});
-	}
-
-	void connect()
-	{
-		createButtons();
-
-		for (Actor actor : StarRealms.stage.getActors())
-			actor.setTouchable(Touchable.enabled);
-
-		for (int i = 0; i < 5; i++)
-			playerState.draw();
-
-		client = new Client();
-		InetAddress address = client.discoverHost(54777, 5000);
-		client.start();
-		try {
-			client.connect(5000, address, 54555, 54777);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Kryo kryo = client.getKryo();
-		kryo.register(GameStateRequest.class);
-
-		client.addListener(new Listener(){
-			@Override
-			public void received(Connection connection, Object object) {
-				if (object instanceof GameStateRequest)
-				{
-					playerState = ((GameStateRequest) object).enemyState;
-					enemyState = ((GameStateRequest) object).playerState;
-					gameState = ((GameStateRequest) object).gameState;
-
-					ArrayList<BaseInfo> newBases = playerState.bases;
-
-					setHealth(playerState.getHealth());
-					for (Actor actor : playerState.basesGroup.getChildren())
-					{
-						actor.remove();
-						playerState.bases.remove(((Base)actor).getCardInfo());
-					}
-					for (BaseInfo baseInfo : playerState.bases)
-					{
-						baseInfo.instance.play();
-						for (Actor actor : StarRealms.playerState.basesGroup.getChildren())
-							actor.setTouchable(Touchable.disabled);
-					}
-					for (Actor actor : enemyState.basesGroup.getChildren())
-						actor.remove();
-					int i = 0;
-					for (BaseInfo baseInfo : enemyState.bases)
-					{
-						Base base = (Base)baseInfo.instance;
-
-						int width = Gdx.graphics.getWidth();
-						int height = Gdx.graphics.getHeight();
-
-						base.setScale(0.55f);
-						base.setRotation(-90);
-						base.setPosition(width - (1 + i) * base.getHeight() * base.getScaleY(), height/2f + base.getWidth(), Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
-
-						StarRealms.playerState.basesGroup.addActor(base);
-						i++;
-					}
-					i = 0;
-					if (enemyState.yourTurn)
-					{
-						for (CardInfo cardInfo : enemyState.playedCards)
-						{
-							Card card = cardInfo.instance;
-							card.setScale(0.6f);
-							card.setPosition(i * card.getWidth() * card.getScaleX(), card.getHeight() * 0.7f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
-							StarRealms.playerState.playedCards.add(cardInfo);
-							StarRealms.playerState.hand.remove(cardInfo);
-
-							StarRealms.playerState.playedCardsGroup.addActor(card);
-							i++;
-						}
-					}
-					if (playerState.yourTurn)
-					{
-						for (Actor actor : StarRealms.stage.getActors())
-							actor.setTouchable(Touchable.enabled);
-					}
-				}
-			}
-		});
+		stage.addActor(enemyBases);
 	}
 
 	void createButtons()
@@ -273,24 +100,94 @@ public class StarRealms extends ApplicationAdapter {
 					playerState.discard(card.instance);
 				playerState.hand.clear();
 
+
+				PlayerState temp = enemyState;
+				enemyState = playerState;
+				playerState = temp;
+
+				for (Actor actor : enemyBases.getChildren())
+					actor.remove();
+				for (Actor actor : playerState.basesGroup.getChildren())
+					actor.remove();
+
 				while (playerState.hand.size() < 5 && !(playerState.discardDeck.isEmpty() && playerState.deck.isEmpty())) {
 					playerState.draw();
 				}
-				playerState.yourTurn = false;
-				enemyState.yourTurn = true;
 
-				for (Actor actor : stage.getActors())
-					actor.setTouchable(Touchable.disabled);
+				setHealth(playerState.getHealth());
+				setEnemyHealth(enemyState.getHealth());
 
-				GameStateRequest request = new GameStateRequest();
-				request.gameState = gameState;
-				request.playerState = playerState;
-				request.enemyState = enemyState;
+				int i = 0;
 
-				if (server != null)
-					server.sendToAllTCP(request);
-				if (client != null)
-					client.sendTCP(request);
+				for (final BaseInfo baseInfo : enemyState.bases)
+				{
+					final Image button = new Image(new TextureRegionDrawable(assets.getTexture(baseInfo.textureName)));
+
+					int width = Gdx.graphics.getWidth();
+					int height = Gdx.graphics.getHeight();
+
+					button.setScale(0.55f);
+					button.setRotation(-90);
+					button.setPosition(width - (1 + i) * button.getHeight() * button.getScaleY(), height/2f + button.getWidth() * button.getScaleX(), Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
+
+					enemyBases.addActor(button);
+
+					button.addListener(new ClickListener() {
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							for (int i = 0; i < enemyState.bases.size(); i++)
+							{
+								BaseInfo otherBase = enemyState.bases.get(i);
+								if (!baseInfo.isTaunt && otherBase.isTaunt && otherBase != baseInfo)
+									return;
+							}
+
+							if (baseInfo.health <= playerState.getAttack())
+							{
+								button.remove();
+								enemyState.bases.remove(baseInfo);
+								enemyState.discard(baseInfo.instance);
+
+								StarRealms.setAttack(playerState.getAttack() - baseInfo.health);
+							}
+						}
+					});
+
+					i++;
+				}
+				i = 0;
+				for (BaseInfo baseInfo : playerState.bases)
+				{
+					Base base =(Base) baseInfo.instance;
+					base.clearListeners(); // Очистить список слушателей, чтобы разыгранную карту нельзя было разыграть ещё раз
+					base.remove();
+
+					int width = Gdx.graphics.getWidth();
+					int height = Gdx.graphics.getHeight();
+
+					base.setScale(0.55f);
+					base.setRotation(-90);
+					base.setPosition(width - (1 + i) * base.getHeight() * base.getScaleY(), height/2f, Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
+
+					StarRealms.playerState.basesGroup.addActor(base);
+					base.createEffectButtons();
+
+					i++;
+				}
+
+				enemyHealthPoints.remove(); // Я пытался сделать clearListeners() но почему-то из-за этого кнопка перестаёт работать
+				enemyHealthPoints = new TextButton("Health: " + enemyState.getHealth(), assets.getSkin());
+				enemyHealthPoints.setTransform(true);
+				enemyHealthPoints.setScale(2);
+				enemyHealthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), height - enemyHealthPoints.getHeight() * enemyHealthPoints.getScaleY(),  Align.bottomRight);
+				enemyHealthPoints.addListener(new ClickListener() {
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						setEnemyHealth(enemyState.getHealth() - playerState.getAttack());
+						setAttack(0);
+					}
+				});
+				stage.addActor(enemyHealthPoints);
 			}
 		});
 
@@ -311,6 +208,13 @@ public class StarRealms extends ApplicationAdapter {
 
 
 		enemyHealthPoints = new TextButton("Health: " + enemyState.getHealth(), assets.getSkin());
+		enemyHealthPoints.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				enemyState.setHealth(enemyState.getHealth() - playerState.getAttack());
+				playerState.setAttack(0);
+			}
+		});
 		enemyHealthPoints.setTransform(true);
 		enemyHealthPoints.setScale(2);
 		enemyHealthPoints.setPosition(endTurn.getX() - (healthPoints.getScaleX() - 1) * healthPoints.getWidth(), height - enemyHealthPoints.getHeight() * enemyHealthPoints.getScaleY(),  Align.bottomRight);
@@ -327,10 +231,6 @@ public class StarRealms extends ApplicationAdapter {
 	{
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 			Gdx.app.exit();
-		if (Gdx.input.isKeyJustPressed(Input.Keys.Q) && server == null && client == null)
-			host();
-		if (Gdx.input.isKeyJustPressed(Input.Keys.W) && server == null && client == null)
-			connect();
 		Gdx.gl.glClearColor(test.r,test.g,test.b,test.a);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act();

@@ -90,6 +90,11 @@ public class GameState {
     public int getExplorerQuantity() {
         return explorerQuantity;
     }
+
+    public CardInfo getExplorerTemplate() {
+        return explorerTemplate;
+    }
+
     public void setExplorerQuantity(int explorerQuantity) {
         this.explorerQuantity = explorerQuantity;
     }

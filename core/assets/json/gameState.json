@@ -55,7 +55,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "trashEffect":null,
             "textureName":"Battle Pod.png"
@@ -75,7 +75,7 @@
                             "attackPoints":5
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 5 points of attack"
                 },
             "textureName":"Battle Station.png"
         },{
@@ -90,7 +90,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 points of attack"
                 },
             "allyEffect":
                 {
@@ -117,7 +117,7 @@
                             "attackPoints":1
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 1 point of attack"
                 },
             "allyEffect":null,
             "trashEffect": 
@@ -128,7 +128,7 @@
                             "money":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 coins"
                 },
             "textureName":"BLOB Wheel.png"
         },{
@@ -157,7 +157,7 @@
                             "money":1
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 1 coin"
                 },
             "trashEffect": 
                 {
@@ -167,7 +167,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "textureName":"Builder Bot.png"
         },{
@@ -202,7 +202,7 @@
                             "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Draw a card"
                 },
             "allyEffect":null,
             "trashEffect": 
@@ -213,7 +213,7 @@
                             "money":1
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 1 coin"
                 },
             "textureName":"Cargo Launch.png"
         },{
@@ -228,7 +228,7 @@
                             "money":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 coins"
                 },
             "allyEffect": 
                 {
@@ -238,7 +238,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 points of attack"
                 },
             "trashEffect":
                 {
@@ -248,7 +248,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 points of attack"
                 },
             "textureName":"Cargo Pob.png"
         },{
@@ -275,7 +275,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "trashEffect":null,
             "textureName":"Corvette.png"
@@ -293,7 +293,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "allyEffect":
                 {
@@ -303,7 +303,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "trashEffect":null,
             "textureName":"Defense System.png"
@@ -332,7 +332,7 @@
                             "attackPoints":5
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 5 points of attack"
                 },
             "textureName":"Dreadnaught.png"
         },{
@@ -350,7 +350,7 @@
                             "healAmount":5
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 5 poins of health and 1 coin"
                 },
             "allyEffect":
                 {
@@ -360,7 +360,7 @@
                             "money":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 coins"
                 },
             "trashEffect":null,
             "textureName":"Federal Transport.png"
@@ -376,7 +376,7 @@
                             "money":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 coins"
                 },
             "allyEffect":
                 {
@@ -386,7 +386,7 @@
                             "healAmount":4
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 4 points of health"
                 },
             "trashEffect":null,
             "textureName":"Federation Shuttle.png"
@@ -405,7 +405,7 @@
                             "healAmount":4
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 4 points of health and 3 coins"
                 },
             "allyEffect":null,
             "trashEffect":
@@ -429,7 +429,7 @@
                             "healAmount":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of health and 2 coins"
                 },
             "allyEffect":null,
             "trashEffect":null,
@@ -446,7 +446,7 @@
                             "money":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 coins"
                 },
             "allyEffect":
                 {
@@ -456,7 +456,7 @@
                             "attackPoints":4
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 4 coins"
                 },
             "trashEffect":null,
             "textureName":"Imperial Trader.png"
@@ -487,7 +487,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "textureName":"Repair Bot.png"
         },{
@@ -504,7 +504,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "allyEffect":
                 {
@@ -514,7 +514,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "trashEffect": 
                 {
@@ -524,7 +524,7 @@
                             "money":4
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 4 coins"
                 },
             "textureName":"Space Station.png"
         },{
@@ -541,7 +541,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "allyEffect":
                 {
@@ -551,7 +551,7 @@
                             "money":1
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 1 coin"
                 },
             "trashEffect":null,
             "textureName":"Spike Cluster.png"
@@ -580,7 +580,7 @@
                             "attackPoints":6
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 6 points of attack"
                 },
             "textureName":"Stellar Ray.png"
         },{
@@ -609,7 +609,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "trashEffect":null,
             "textureName":"Trade Bot.png"
@@ -633,7 +633,7 @@
                             "healAmount":5
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 points of attack, 5 points of health and 4 coins"
                 },
             "allyEffect":null,
             "trashEffect":null,
@@ -652,7 +652,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 3 points of attack"
                 },
             "allyEffect":
                 {
@@ -662,12 +662,14 @@
                             "attackPoints":4
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 4 points of attack"
                 },
             "trashEffect":null,
             "textureName":"War World.png"
         }
     ],
+    "trash":null,
+    "explorerQuantity":12,
 	"explorerTemplate":
 	{
 			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
@@ -681,7 +683,7 @@
                             "money":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 coins"
                 },
             "allyEffect":null,
             "trashEffect":
@@ -692,7 +694,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":null
+                    "effectText":"Gain 2 points of attack"
                 },
             "textureName":"Explorer.png"
         }
