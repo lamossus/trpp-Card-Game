@@ -87,6 +87,9 @@ public class GameState {
         }
     }
 
+    /**
+     * Перемешивание трейд ряда
+     */
     public void shuffle() {
         int index;
         CardInfo temp;
