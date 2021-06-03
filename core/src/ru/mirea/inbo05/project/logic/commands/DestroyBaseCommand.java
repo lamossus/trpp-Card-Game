@@ -27,8 +27,10 @@ public class DestroyBaseCommand implements Command {
             card.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    StarRealms.gameState.trash.add(cardInfo);
+                    StarRealms.enemyState.discardDeck.add(cardInfo);
                     StarRealms.enemyState.bases.remove(cardInfo);
+
+                    StarRealms.placeBases();
 
                     scrollPane.remove();
                     for (Actor actor : StarRealms.stage.getActors())
@@ -38,8 +40,6 @@ public class DestroyBaseCommand implements Command {
             scrollTable.add(card);
             scrollTable.row();
         }
-
-
 
         scrollPane.setHeight(Gdx.graphics.getHeight());
         scrollPane.setWidth(Gdx.graphics.getWidth());

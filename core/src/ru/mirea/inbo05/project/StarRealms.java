@@ -27,65 +27,72 @@ import ru.mirea.inbo05.project.logic.cards.CardInfo;
 import java.io.IOException;
 
 public class StarRealms extends ApplicationAdapter {
-	public static Assets assets;
-	public static Stage stage;
+    public static Assets assets;
+    public static Stage stage;
 
-	public static PlayerState playerState;
-	public static PlayerState enemyState;
-	public static GameState gameState;
+    public static PlayerState playerState;
+    public static PlayerState enemyState;
+    public static GameState gameState;
 
-	static int width;
-	static int height;
+    static int width;
+    static int height;
 
-	SpriteBatch batch;
-	Color test = new Color((float) 0.537, (float) 0.756, (float) 0.439, (float) 0.5);
+    SpriteBatch batch;
+    Color test = new Color((float) 0.537, (float) 0.756, (float) 0.439, (float) 0.5);
 
-	static TextButton healthPoints, enemyHealthPoints, moneyPoints, attackPoints;
-	Group enemyBases;
+    static TextButton healthPoints, enemyHealthPoints, moneyPoints, attackPoints;
+    static Group enemyBases;
 
-	@Override
-	public void create () {
-		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
+    boolean loaded = false;
 
-		enemyBases = new Group();
+    @Override
+    public void create() {
+        assets = new Assets();
+    }
 
-		batch = new SpriteBatch();
-		assets = new Assets();
-		stage = new Stage(new ScreenViewport());
+    void startGame()
+    {
+        Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
 
-		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
+        enemyBases = new Group();
 
-		Gdx.input.setInputProcessor(stage);
-		playerState = new PlayerState();
-		enemyState = new PlayerState();
-		gameState = new GameState();
+        batch = new SpriteBatch();
 
-		ObjectMapper om = new ObjectMapper();
-		om.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        stage = new Stage(new ScreenViewport());
 
-		try {
-			playerState = om.readValue(Gdx.files.internal("json/playerState.json").file(), PlayerState.class);
-			enemyState = om.readValue(Gdx.files.internal("json/playerState.json").file(), PlayerState.class);
-			gameState = om.readValue(Gdx.files.internal("json/gameState.json").file(), GameState.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
 
-		playerState.shuffle();
-		enemyState.shuffle();
-		gameState.shuffle();
+        Gdx.input.setInputProcessor(stage);
+        playerState = new PlayerState();
+        enemyState = new PlayerState();
+        gameState = new GameState();
+
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        try {
+            playerState = om.readValue(Gdx.files.internal("json/playerState.json").file(), PlayerState.class);
+            enemyState = om.readValue(Gdx.files.internal("json/playerState.json").file(), PlayerState.class);
+            gameState = om.readValue(Gdx.files.internal("json/gameState.json").file(), GameState.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        playerState.shuffle();
+        enemyState.shuffle();
+        gameState.shuffle();
 
 
-		for (int i = 0; i < 3; i++)
-			playerState.draw();
+        for (int i = 0; i < 3; i++)
+            playerState.draw();
 
-		gameState.refill();
+        gameState.refill();
 
-		createButtons();
+        createButtons();
 
-		stage.addActor(enemyBases);
-	}
+        stage.addActor(enemyBases);
+    }
 
 	void createButtons()
 	{
@@ -109,6 +116,15 @@ public class StarRealms extends ApplicationAdapter {
 						card.trashEffect.setActive(true);
 					playerState.discard(card.instance);
 				}
+				for (CardInfo card : playerState.bases)
+				{
+					if(card.mainEffect != null)
+						card.mainEffect.setActive(true);
+					if(card.allyEffect != null)
+						card.allyEffect.setActive(true);
+					if(card.trashEffect != null)
+						card.trashEffect.setActive(true);
+				}
 
 				playerState.playedCards.clear();
 
@@ -116,15 +132,12 @@ public class StarRealms extends ApplicationAdapter {
 					playerState.discard(card.instance);
 				playerState.hand.clear();
 
+				for (Actor actor : playerState.basesGroup.getChildren())
+					actor.remove();
 
 				PlayerState temp = enemyState;
 				enemyState = playerState;
 				playerState = temp;
-
-				for (Actor actor : enemyBases.getChildren())
-					actor.remove();
-				for (Actor actor : playerState.basesGroup.getChildren())
-					actor.remove();
 
 				while (playerState.hand.size() < 5 && !(playerState.discardDeck.isEmpty() && playerState.deck.isEmpty())) {
 					playerState.draw();
@@ -133,45 +146,9 @@ public class StarRealms extends ApplicationAdapter {
 				setHealth(playerState.getHealth());
 				setEnemyHealth(enemyState.getHealth());
 
+                placeBases();
+
 				int i = 0;
-
-				for (final BaseInfo baseInfo : enemyState.bases)
-				{
-					final Image button = new Image(new TextureRegionDrawable(assets.getTexture(baseInfo.textureName)));
-
-					int width = Gdx.graphics.getWidth();
-					int height = Gdx.graphics.getHeight();
-
-					button.setScale(0.55f);
-					button.setRotation(-90);
-					button.setPosition(width - (1 + i) * button.getHeight() * button.getScaleY(), height/2f + button.getWidth() * button.getScaleX(), Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
-
-					enemyBases.addActor(button);
-
-					button.addListener(new ClickListener() {
-						@Override
-						public void clicked(InputEvent event, float x, float y) {
-							for (int i = 0; i < enemyState.bases.size(); i++)
-							{
-								BaseInfo otherBase = enemyState.bases.get(i);
-								if (!baseInfo.isTaunt && otherBase.isTaunt && otherBase != baseInfo)
-									return;
-							}
-
-							if (baseInfo.health <= playerState.getAttack())
-							{
-								button.remove();
-								enemyState.bases.remove(baseInfo);
-								enemyState.discard(baseInfo.instance);
-
-								StarRealms.setAttack(playerState.getAttack() - baseInfo.health);
-							}
-						}
-					});
-
-					i++;
-				}
-				i = 0;
 				for (BaseInfo baseInfo : playerState.bases)
 				{
 					Base base =(Base) baseInfo.instance;
@@ -199,6 +176,12 @@ public class StarRealms extends ApplicationAdapter {
 				enemyHealthPoints.addListener(new ClickListener() {
 					@Override
 					public void clicked(InputEvent event, float x, float y) {
+						for (BaseInfo baseInfo : enemyState.bases)
+						{
+							if (baseInfo.isTaunt)
+								return;
+						}
+
 						setEnemyHealth(enemyState.getHealth() - playerState.getAttack());
 						setAttack(0);
 					}
@@ -227,6 +210,11 @@ public class StarRealms extends ApplicationAdapter {
 		enemyHealthPoints.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				for (BaseInfo baseInfo : enemyState.bases)
+				{
+					if (baseInfo.isTaunt)
+						return;
+				}
 				enemyState.setHealth(enemyState.getHealth() - playerState.getAttack());
 				playerState.setAttack(0);
 			}
@@ -245,6 +233,18 @@ public class StarRealms extends ApplicationAdapter {
 	@Override
 	public void render ()
 	{
+	    if (!loaded)
+        {
+			assets.manager.update();
+            if (assets.manager.isFinished())
+            {
+                loaded = true;
+                startGame();
+            }
+            else
+                return;
+        }
+
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
 			Gdx.app.exit();
 		Gdx.gl.glClearColor(test.r,test.g,test.b,test.a);
@@ -289,4 +289,48 @@ public class StarRealms extends ApplicationAdapter {
 		playerState.setAttack(attack);
 		attackPoints.setText("Attack: " + playerState.getAttack());
 	}
+
+	public static void placeBases()
+    {
+        int i = 0;
+        for (Actor actor :enemyBases.getChildren())
+        	actor.remove();
+
+        for (final BaseInfo baseInfo : enemyState.bases)
+        {
+            final Image button = new Image(new TextureRegionDrawable(assets.getTexture(baseInfo.textureName)));
+
+            int width = Gdx.graphics.getWidth();
+            int height = Gdx.graphics.getHeight();
+
+            button.setScale(0.55f);
+            button.setRotation(-90);
+            button.setPosition(width - (1 + i) * button.getHeight() * button.getScaleY(), height/2f + button.getWidth() * button.getScaleX(), Align.bottomLeft); // Расположить карту над рукой. Надо бы сделать покрасивше
+
+            enemyBases.addActor(button);
+
+            button.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    for (int i = 0; i < enemyState.bases.size(); i++)
+                    {
+                        BaseInfo otherBase = enemyState.bases.get(i);
+                        if (!baseInfo.isTaunt && otherBase.isTaunt && otherBase != baseInfo)
+                            return;
+                    }
+
+                    if (baseInfo.health <= playerState.getAttack())
+                    {
+                        button.remove();
+                        enemyState.bases.remove(baseInfo);
+                        enemyState.discard(baseInfo.instance);
+
+                        StarRealms.setAttack(playerState.getAttack() - baseInfo.health);
+                    }
+                }
+            });
+
+            i++;
+        }
+    }
 }

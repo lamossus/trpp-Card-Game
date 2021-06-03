@@ -17,7 +17,6 @@ public class Assets {
             manager.load(stringPath, Texture.class);
         }
         manager.load("uiskin.json", Skin.class);
-        manager.finishLoading();
     }
 
     /** Получить текстуру по её названию */
@@ -25,7 +24,9 @@ public class Assets {
     {
         if (manager.isLoaded("images/cards/" + name, Texture.class))
             return manager.get("images/cards/" + name, Texture.class);
-        return null;
+        manager.load("images/cards/" + name, Texture.class);
+        manager.finishLoading();
+        return manager.get("images/cards/" + name, Texture.class);
     }
 
     public Skin getSkin()
