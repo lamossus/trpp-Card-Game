@@ -7,6 +7,9 @@ import ru.mirea.inbo05.project.logic.PlayerState;
 import ru.mirea.inbo05.project.logic.cards.Card;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
+/**
+ * Класс команды вытягивания карты
+ */
 public class DrawCommand implements Command{
     @Override
     public boolean execute() {

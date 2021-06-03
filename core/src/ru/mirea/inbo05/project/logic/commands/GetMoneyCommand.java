@@ -7,6 +7,10 @@ public class GetMoneyCommand implements Command {
     /** Количество получаемых очков торговли */
     private int money;
 
+    /**
+     *
+     * Добавляет игроку монетки
+     */
     @Override
     public boolean execute() {
         StarRealms.setMoney(StarRealms.playerState.getMoney() + money);

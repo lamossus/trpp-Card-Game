@@ -12,7 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import ru.mirea.inbo05.project.StarRealms;
 import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
-
+/**
+ * Класс уничтожения базы врага. При срабатывании эффекта возникает скроллбар с выбором нужной вражеской базы,
+ * которую игрок хочет уничтожить
+ */
 public class DestroyBaseCommand implements Command {
 
     @Override
@@ -21,8 +24,13 @@ public class DestroyBaseCommand implements Command {
             actor.setTouchable(Touchable.disabled);
 
         Table scrollTable = new Table();
+        // Создание скролл-панели
         final ScrollPane scrollPane = new ScrollPane(scrollTable, StarRealms.assets.getSkin());
         for (final CardInfo cardInfo : StarRealms.enemyState.bases) {
+
+            /**
+             * Добавление листенера на карты, при его срабатывании карта базы отправляется в утиль и удаляется со стола.
+             */
             final ImageButton card = new ImageButton(new TextureRegionDrawable(StarRealms.assets.getTexture(cardInfo.textureName)));
             card.addListener(new ClickListener() {
                 @Override

@@ -26,6 +26,9 @@ import ru.mirea.inbo05.project.logic.cards.CardInfo;
 
 import java.io.IOException;
 
+/**
+ * Главный класс приложения. Представляет собой
+ */
 public class StarRealms extends ApplicationAdapter {
     public static Assets assets;
     public static Stage stage;
@@ -43,13 +46,17 @@ public class StarRealms extends ApplicationAdapter {
     static TextButton healthPoints, enemyHealthPoints, moneyPoints, attackPoints;
     static Group enemyBases;
 
-    boolean loaded = false;
-
+	/**
+	 * Метод загрузки ассетов
+	 */
     @Override
     public void create() {
         assets = new Assets();
     }
 
+  /**
+	 * Метод загрузки ассетов
+	 */
     void startGame()
     {
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode(Gdx.graphics.getMonitor()));
@@ -94,6 +101,9 @@ public class StarRealms extends ApplicationAdapter {
         stage.addActor(enemyBases);
     }
 
+	/**
+	 * Метод создания кнопок
+	 */
 	void createButtons()
 	{
 		final TextButton endTurn = new TextButton("End turn", assets.getSkin());
@@ -230,6 +240,9 @@ public class StarRealms extends ApplicationAdapter {
 		StarRealms.stage.addActor(attackPoints);
 	}
 
+	/**
+	 * Метод рендеринга сцены
+	 */
 	@Override
 	public void render ()
 	{
@@ -252,7 +265,10 @@ public class StarRealms extends ApplicationAdapter {
 		stage.act();
 		stage.draw();
 	}
-	
+
+	/**
+	 * Метод очистки бэтчей и ресурсов
+	 */
 	@Override
 	public void dispose ()
 	{

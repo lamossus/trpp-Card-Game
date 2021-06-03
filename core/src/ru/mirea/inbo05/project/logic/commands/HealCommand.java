@@ -7,6 +7,9 @@ public class HealCommand implements Command {
     /** Количество восстанавливаемых очков здоровья */
     private int healAmount;
 
+    /**
+     * Метод добавляет очки здоровья игроку
+     */
     @Override
     public boolean execute() {
         StarRealms.setHealth(StarRealms.playerState.getHealth() + healAmount);
