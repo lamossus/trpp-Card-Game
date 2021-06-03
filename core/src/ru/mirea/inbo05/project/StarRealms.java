@@ -45,6 +45,7 @@ public class StarRealms extends ApplicationAdapter {
 
     static TextButton healthPoints, enemyHealthPoints, moneyPoints, attackPoints;
     static Group enemyBases;
+    boolean loaded = false;
 
 	/**
 	 * Метод загрузки ассетов
