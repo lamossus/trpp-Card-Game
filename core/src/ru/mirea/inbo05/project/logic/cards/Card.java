@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import ru.mirea.inbo05.project.StarRealms;
 
+import java.util.ArrayList;
+
 /**
  * Класс, представляющий собой кнопку, созданную на основе информации о карте
  */
@@ -60,7 +62,11 @@ public class Card extends Image {
 
                 boolean otherAlliesPlayed = false;
 
-                for (CardInfo playedCardInfo : StarRealms.playerState.playedCards)
+                ArrayList<CardInfo> cardsToCheck = new ArrayList<>();
+                cardsToCheck.addAll(StarRealms.playerState.playedCards);
+                cardsToCheck.addAll(StarRealms.playerState.bases);
+
+                for (CardInfo playedCardInfo : cardsToCheck)
                 {
                     if (playedCardInfo != cardInfo && playedCardInfo.faction == cardInfo.faction)
                     {
@@ -120,6 +126,11 @@ public class Card extends Image {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
                             cardInfo.trashEffect.activate();
+                            StarRealms.playerState.playedCards.remove(cardInfo);
+                            if (cardInfo instanceof BaseInfo)
+                                StarRealms.playerState.bases.remove(cardInfo);
+                            StarRealms.gameState.trash.add(cardInfo);
+                            cardInfo.instance.remove();
                             buttons.remove();
                             for (Actor actor : StarRealms.stage.getActors())
                                 actor.setTouchable(Touchable.enabled);

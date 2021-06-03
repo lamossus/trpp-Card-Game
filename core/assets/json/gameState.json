@@ -16,7 +16,7 @@
                             "may":true
                         }
                     ],
-                    "effectText":"You may scrap a card in your hand or discard pile"
+                    "effectText":"Gain 4 attack points. You may scrap a card in your hand or discard pile"
                 },
             "allyEffect":
                 {
@@ -45,7 +45,7 @@
                             "may":true
                         }
                     ],
-                    "effectText":"You may scrap a card in the trade row"
+                    "effectText":"Gain 4 attack points. You may scrap a card in the trade row"
                 },
             "allyEffect":
                 {
@@ -55,7 +55,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "trashEffect":null,
             "textureName":"Battle Pod.png"
@@ -75,7 +75,7 @@
                             "attackPoints":5
                         }
                     ],
-                    "effectText":"Gain 5 points of attack"
+                    "effectText":"Gain 5 attack points"
                 },
             "textureName":"Battle Station.png"
         },{
@@ -90,7 +90,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":"Gain 3 points of attack"
+                    "effectText":"Gain 3 attack points"
                 },
             "allyEffect":
                 {
@@ -117,7 +117,7 @@
                             "attackPoints":1
                         }
                     ],
-                    "effectText":"Gain 1 point of attack"
+                    "effectText":"Gain 1 attack point"
                 },
             "allyEffect":null,
             "trashEffect": 
@@ -147,7 +147,7 @@
                             "may":true
                         }
                     ],
-                    "effectText":"You may scrap a card in your discard pile"
+                    "effectText":"Gain 1 coin. You may scrap a card in your discard pile"
                 },
             "allyEffect":
                 {
@@ -167,7 +167,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "textureName":"Builder Bot.png"
         },{
@@ -186,7 +186,7 @@
                             "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
                         }
                     ],
-                    "effectText":"Draw a card"
+                    "effectText":"Gain 6 health. Draw a card"
                 },
             "allyEffect":null,
             "trashEffect":null,
@@ -238,7 +238,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":"Gain 3 points of attack"
+                    "effectText":"Gain 3 attack points"
                 },
             "trashEffect":
                 {
@@ -248,9 +248,9 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":"Gain 3 points of attack"
+                    "effectText":"Gain 3 attack points"
                 },
-            "textureName":"Cargo Pob.png"
+            "textureName":"Cargo Pod.png"
         },{
 			"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
             "cost":2,
@@ -265,7 +265,7 @@
                             "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
                         }
                     ],
-                    "effectText":"Draw a card"
+                    "effectText":"Gain 1 attack point. Draw a card"
                 },
             "allyEffect": 
                 {
@@ -275,7 +275,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "trashEffect":null,
             "textureName":"Corvette.png"
@@ -293,7 +293,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "allyEffect":
                 {
@@ -303,7 +303,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "trashEffect":null,
             "textureName":"Defense System.png"
@@ -321,7 +321,7 @@
                             "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
                         }
                     ],
-                    "effectText":"Draw a card"
+                    "effectText":"Gain 7 attack points. Draw a card"
                 },
             "allyEffect":null,
             "trashEffect":
@@ -332,7 +332,7 @@
                             "attackPoints":5
                         }
                     ],
-                    "effectText":"Gain 5 points of attack"
+                    "effectText":"Gain 5 attack points"
                 },
             "textureName":"Dreadnaught.png"
         },{
@@ -350,7 +350,7 @@
                             "healAmount":5
                         }
                     ],
-                    "effectText":"Gain 5 poins of health and 1 coin"
+                    "effectText":"Gain 5 health and 1 coin"
                 },
             "allyEffect":
                 {
@@ -386,7 +386,7 @@
                             "healAmount":4
                         }
                     ],
-                    "effectText":"Gain 4 points of health"
+                    "effectText":"Gain 4 health"
                 },
             "trashEffect":null,
             "textureName":"Federation Shuttle.png"
@@ -410,7 +410,11 @@
             "allyEffect":null,
             "trashEffect":
                 {
-                    "commands":[],
+                    "commands":[
+					{
+						"className":"ru.mirea.inbo05.project.logic.commands.DestroyBaseCommand"
+					}
+					],
                     "effectText":"Destroy target base"
                 },
             "textureName":"Frontier Ferry.png"
@@ -429,7 +433,7 @@
                             "healAmount":2
                         }
                     ],
-                    "effectText":"Gain 2 points of health and 2 coins"
+                    "effectText":"Gain 2 health and 2 coins"
                 },
             "allyEffect":null,
             "trashEffect":null,
@@ -456,7 +460,7 @@
                             "attackPoints":4
                         }
                     ],
-                    "effectText":"Gain 4 coins"
+                    "effectText":"Gain 4 attack points"
                 },
             "trashEffect":null,
             "textureName":"Imperial Trader.png"
@@ -476,7 +480,7 @@
                             "may":true
                         }
                     ],
-                    "effectText":"You may scrap a card in your discard pile"
+                    "effectText":"Gain 2 coins. You may scrap a card in your discard pile"
                 },
             "allyEffect":null,
             "trashEffect": 
@@ -487,7 +491,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "textureName":"Repair Bot.png"
         },{
@@ -504,7 +508,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "allyEffect":
                 {
@@ -514,7 +518,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "trashEffect": 
                 {
@@ -541,7 +545,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "allyEffect":
                 {
@@ -563,13 +567,13 @@
                 {
                     "commands": [
                         {
-                            "className":"ru.mirea.inbo05.project.logic.commands.GetAttackPointsCommand",
-                            "attackPoints":3
+                            "className":"ru.mirea.inbo05.project.logic.commands.GetMoneyCommand",
+                            "money":3
                         },{
                             "className":"ru.mirea.inbo05.project.logic.commands.DrawCommand"
                         }
                     ],
-                    "effectText":"Draw a card"
+                    "effectText":"Gain 3 coins. Draw a card"
                 },
             "allyEffect":null,
             "trashEffect": 
@@ -580,7 +584,7 @@
                             "attackPoints":6
                         }
                     ],
-                    "effectText":"Gain 6 points of attack"
+                    "effectText":"Gain 6 attack points"
                 },
             "textureName":"Stellar Ray.png"
         },{
@@ -599,7 +603,7 @@
                             "may":true
                         }
                     ],
-                    "effectText":"You may scrab a card in your hand or discard pile"
+                    "effectText":"Gain 1 coin. You may scrap a card in your hand or discard pile"
                 },
             "allyEffect":
                 {
@@ -609,7 +613,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "trashEffect":null,
             "textureName":"Trade Bot.png"
@@ -633,7 +637,7 @@
                             "healAmount":5
                         }
                     ],
-                    "effectText":"Gain 3 points of attack, 5 points of health and 4 coins"
+                    "effectText":"Gain 3 attack points, 5 health and 4 coins"
                 },
             "allyEffect":null,
             "trashEffect":null,
@@ -652,7 +656,7 @@
                             "attackPoints":3
                         }
                     ],
-                    "effectText":"Gain 3 points of attack"
+                    "effectText":"Gain 3 attack points"
                 },
             "allyEffect":
                 {
@@ -662,7 +666,7 @@
                             "attackPoints":4
                         }
                     ],
-                    "effectText":"Gain 4 points of attack"
+                    "effectText":"Gain 4 attack points"
                 },
             "trashEffect":null,
             "textureName":"War World.png"
@@ -693,7 +697,7 @@
                             "attackPoints":2
                         }
                     ],
-                    "effectText":"Gain 2 points of attack"
+                    "effectText":"Gain 2 attack points"
                 },
             "textureName":"Explorer.png"
         }

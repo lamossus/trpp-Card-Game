@@ -2,8 +2,8 @@
     "health":50,
     "money":0,
     "attack":0,
-    "deck": [
-        {
+    "deck": [],
+	"discardDeck": [{
 		"className":"ru.mirea.inbo05.project.logic.cards.CardInfo",
             "cost":0,
             "faction":null,
@@ -173,8 +173,7 @@
             "allyEffect":null,
             "trashEffect":null,
             "textureName":"Viper.png"
-        }
-    ], 
+        }],
     "playedCards":[],
     "bases":[]
 }
